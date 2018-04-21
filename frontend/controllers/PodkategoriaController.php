@@ -68,25 +68,24 @@ class PodkategoriaController extends Controller
     public function actionCreate()
     {
         $model = new Podkategoria();
-        $kategorie=Kategoria::find()
+        $model->scenario = 'create';
+        $kategorie = Kategoria::find()
             ->orderBy('nazwa')
             ->all();
-        $kategorie=ArrayHelper::map($kategorie,'id','nazwa');
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->obrazek= UploadedFile::getInstance($model,'obrazek');
-            if(!is_null($model->obrazek)){
-                $image_name= $model->nazwa.rand(1, 4000).'.'.$model->obrazek->getExtension();
-                $image_path='uploads/podkategorie/'.$image_name;
-                $model->obrazek->saveAs($image_path);
-                $model->obrazek=$image_path;
-                $model->save();
-            }
+        $kategorie = ArrayHelper::map($kategorie, 'id', 'nazwa');
+        if ($model->load(Yii::$app->request->post())) {
+            $model->obrazek = UploadedFile::getInstance($model, 'obrazek');
+            $image_name = $model->nazwa . rand(1, 4000) . '.' . $model->obrazek->getExtension();
+            $image_path = 'uploads/podkategorie/' . $image_name;
+            $model->obrazek->saveAs($image_path);
+            $model->obrazek = $image_path;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'kategorie' =>$kategorie,
+            'kategorie' => $kategorie,
         ]);
     }
 
@@ -100,17 +99,20 @@ class PodkategoriaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $kategorie=Kategoria::find()
+        $kategorie = Kategoria::find()
             ->orderBy('nazwa')
             ->all();
-        $kategorie=ArrayHelper::map($kategorie,'id','nazwa');
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->obrazek= UploadedFile::getInstance($model,'obrazek');
-            if(!is_null($model->obrazek)){
-                $image_name= $model->nazwa.rand(1, 4000).'.'.$model->obrazek->getExtension();
-                $image_path='uploads/podkategorie/'.$image_name;
+        $kategorie = ArrayHelper::map($kategorie, 'id', 'nazwa');
+        if ($model->load(Yii::$app->request->post())) {
+            $model->obrazek = UploadedFile::getInstance($model, 'obrazek');
+            if (null !== $model->obrazek) {
+                $image_name = $model->nazwa . rand(1, 4000) . '.' . $model->obrazek->getExtension();
+                $image_path = 'uploads/podkategorie/' . $image_name;
                 $model->obrazek->saveAs($image_path);
-                $model->obrazek=$image_path;
+                $model->obrazek = $image_path;
+                $model->save();
+            } else {
+                $model->obrazek = $this->findModel($id)->obrazek;
                 $model->save();
             }
             return $this->redirect(['view', 'id' => $model->id]);
@@ -119,7 +121,7 @@ class PodkategoriaController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'kategorie' =>$kategorie,
+            'kategorie' => $kategorie,
         ]);
     }
 

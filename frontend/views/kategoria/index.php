@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\KategoriaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Kategorias';
+$this->title = 'Kategorie';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kategoria-index">

@@ -66,17 +66,14 @@ class KategoriaController extends Controller
     public function actionCreate()
     {
         $model = new Kategoria();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-
-            $model->obrazek= UploadedFile::getInstance($model,'obrazek');
-            if(!is_null($model->obrazek)){
-                $image_name= $model->nazwa.rand(1, 4000).'.'.$model->obrazek->getExtension();
-                $image_path='uploads/kategorie/'.$image_name;
-                $model->obrazek->saveAs($image_path);
-                $model->obrazek=$image_path;
-                $model->save();
-            }
+        $model->scenario = 'create';
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->obrazek = UploadedFile::getInstance($model, 'obrazek');
+            $image_name = $model->nazwa . rand(1, 4000) . '.' . $model->obrazek->getExtension();
+            $image_path = 'uploads/kategorie/' . $image_name;
+            $model->obrazek->saveAs($image_path);
+            $model->obrazek = $image_path;
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -96,13 +93,16 @@ class KategoriaController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->obrazek= UploadedFile::getInstance($model,'obrazek');
-            if(!is_null($model->obrazek)){
-                $image_name= $model->nazwa.rand(1, 4000).'.'.$model->obrazek->getExtension();
-                $image_path='uploads/kategorie/'.$image_name;
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->obrazek = UploadedFile::getInstance($model, 'obrazek');
+            if (null !== $model->obrazek) {
+                $image_name = $model->nazwa . rand(1, 4000) . '.' . $model->obrazek->getExtension();
+                $image_path = 'uploads/kategorie/' . $image_name;
                 $model->obrazek->saveAs($image_path);
-                $model->obrazek=$image_path;
+                $model->obrazek = $image_path;
+                $model->save();
+            } else {
+                $model->obrazek = $this->findModel($id)->obrazek;
                 $model->save();
             }
             return $this->redirect(['view', 'id' => $model->id]);
