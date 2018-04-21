@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Podkategoria */
 
-$this->title = 'Create Podkategoria';
+$this->title = 'Stwórz podkategorię';
 $this->params['breadcrumbs'][] = ['label' => 'Podkategorias', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'kategorie'=> $kategorie,
     ]) ?>
 
 </div>

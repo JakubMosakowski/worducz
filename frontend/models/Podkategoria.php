@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use app\models\Kategoria;
 
 use Yii;
 
@@ -36,7 +37,8 @@ class Podkategoria extends \yii\db\ActiveRecord
         return [
             [['kategoria_id', 'nazwa', 'opis'], 'required'],
             [['kategoria_id'], 'integer'],
-            [['opis', 'obrazek'], 'string'],
+            [['opis'], 'string'],
+            [['obrazek'], 'file','extensions'=>'jpeg,jpg,png,gif'],
             [['nazwa'], 'string', 'max' => 50],
             [['kategoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Kategoria::className(), 'targetAttribute' => ['kategoria_id' => 'id']],
         ];

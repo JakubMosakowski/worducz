@@ -31,7 +31,8 @@ class Kategoria extends \yii\db\ActiveRecord
     {
         return [
             [['nazwa', 'opis'], 'required'],
-            [['opis', 'obrazek'], 'string'],
+            [['opis'], 'string'],
+            [['obrazek'], 'file','extensions'=>'jpeg,jpg,png,gif'],
             [['nazwa'], 'string', 'max' => 20],
         ];
     }

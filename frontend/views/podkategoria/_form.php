@@ -12,13 +12,14 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'kategoria_id')->textInput() ?>
+    <?= $form->field($model, 'kategoria_id')->dropDownList($kategorie) ?>
 
     <?= $form->field($model, 'nazwa')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'opis')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'obrazek')->textInput() ?>
+    <?= $form->field($model, 'obrazek')->fileInput() ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

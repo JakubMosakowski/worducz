@@ -6,7 +6,7 @@ use Yii;
 use app\models\Kategoria;
 use app\models\KategoriaSearch;
 use yii\web\Controller;
-
+use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -68,6 +68,15 @@ class KategoriaController extends Controller
         $model = new Kategoria();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+            $model->obrazek= UploadedFile::getInstance($model,'obrazek');
+            if(!is_null($model->obrazek)){
+                $image_name= $model->nazwa.rand(1, 4000).'.'.$model->obrazek->getExtension();
+                $image_path='uploads/kategorie/'.$image_name;
+                $model->obrazek->saveAs($image_path);
+                $model->obrazek=$image_path;
+                $model->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -88,6 +97,14 @@ class KategoriaController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->obrazek= UploadedFile::getInstance($model,'obrazek');
+            if(!is_null($model->obrazek)){
+                $image_name= $model->nazwa.rand(1, 4000).'.'.$model->obrazek->getExtension();
+                $image_path='uploads/kategorie/'.$image_name;
+                $model->obrazek->saveAs($image_path);
+                $model->obrazek=$image_path;
+                $model->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

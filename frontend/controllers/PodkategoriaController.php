@@ -8,6 +8,9 @@ use app\models\PodkategoriaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Kategoria;
+use yii\helpers\ArrayHelper;
+use yii\web\UploadedFile;
 
 /**
  * PodkategoriaController implements the CRUD actions for Podkategoria model.
@@ -65,13 +68,25 @@ class PodkategoriaController extends Controller
     public function actionCreate()
     {
         $model = new Podkategoria();
-
+        $kategorie=Kategoria::find()
+            ->orderBy('nazwa')
+            ->all();
+        $kategorie=ArrayHelper::map($kategorie,'id','nazwa');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->obrazek= UploadedFile::getInstance($model,'obrazek');
+            if(!is_null($model->obrazek)){
+                $image_name= $model->nazwa.rand(1, 4000).'.'.$model->obrazek->getExtension();
+                $image_path='uploads/podkategorie/'.$image_name;
+                $model->obrazek->saveAs($image_path);
+                $model->obrazek=$image_path;
+                $model->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'kategorie' =>$kategorie,
         ]);
     }
 
@@ -85,13 +100,26 @@ class PodkategoriaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $kategorie=Kategoria::find()
+            ->orderBy('nazwa')
+            ->all();
+        $kategorie=ArrayHelper::map($kategorie,'id','nazwa');
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->obrazek= UploadedFile::getInstance($model,'obrazek');
+            if(!is_null($model->obrazek)){
+                $image_name= $model->nazwa.rand(1, 4000).'.'.$model->obrazek->getExtension();
+                $image_path='uploads/podkategorie/'.$image_name;
+                $model->obrazek->saveAs($image_path);
+                $model->obrazek=$image_path;
+                $model->save();
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+
         return $this->render('update', [
             'model' => $model,
+            'kategorie' =>$kategorie,
         ]);
     }
 

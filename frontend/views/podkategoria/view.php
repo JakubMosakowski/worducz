@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Podkategoria */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Podkategorias', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Podkategorie', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="podkategoria-view">
@@ -29,10 +29,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'kategoria_id',
+            'kategoria.nazwa',
             'nazwa',
             'opis:ntext',
-            'obrazek',
+            'obrazek:image',
         ],
     ]) ?>
 

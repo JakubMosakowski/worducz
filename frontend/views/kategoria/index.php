@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Kategoria', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Stwórz kategorię', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,11 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'nazwa',
             'opis:ntext',
-            'obrazek',
-
+            [
+                'label' => 'Obrazek',
+                'attribute' => 'obrazek',
+                'format' => 'html',
+                'value' =>function($model){
+                    return yii\bootstrap\Html::img($model->obrazek,['width'=>'75']);
+                }
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

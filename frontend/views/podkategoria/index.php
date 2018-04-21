@@ -1,13 +1,13 @@
 <?php
 
-use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PodkategoriaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Podkategorias';
+$this->title = 'Podkategorie';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="podkategoria-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Podkategoria', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Stwórz podkategorię', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,11 +25,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'kategoria_id',
+            //'id',
+            'kategoria.nazwa',
             'nazwa',
             'opis:ntext',
-            'obrazek',
+            [
+                'label' => 'Obrazek',
+                'attribute' => 'obrazek',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return yii\bootstrap\Html::img($model->obrazek, ['width' => '75']);
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
