@@ -1,17 +1,20 @@
 <?php
 namespace common\models;
 
+use app\models\Rola;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
-
 /**
  * User model
  *
  * @property integer $id
  * @property string $username
+ * @property int $rola_id
+ * @property string $imie
+ * @property string $nazwisko
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
@@ -32,7 +35,7 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%user}}';
+        return 'konto';
     }
 
     /**
@@ -52,6 +55,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
+
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
         ];
     }
