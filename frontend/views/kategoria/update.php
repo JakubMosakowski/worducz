@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Kategoria */
 
-$this->title = 'Zaktualizuj kategorię:b'.$model->nazwa;
+$this->title = 'Zaktualizuj kategorię: '.$model->nazwa;
 $this->params['breadcrumbs'][] = ['label' => 'Kategorias', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Zaktualizuj';

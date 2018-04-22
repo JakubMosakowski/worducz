@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\ImageUploader;
 use Yii;
 use app\models\Kategoria;
 use app\models\KategoriaSearch;
@@ -69,11 +70,8 @@ class KategoriaController extends Controller
         $model->scenario = 'create';
         if ($model->load(Yii::$app->request->post()) ) {
             $model->obrazek = UploadedFile::getInstance($model, 'obrazek');
-            $image_name = $model->nazwa . rand(1, 4000) . '.' . $model->obrazek->getExtension();
-            $image_path = 'uploads/kategorie/' . $image_name;
-            $model->obrazek->saveAs($image_path);
-            $model->obrazek = $image_path;
-            $model->save();
+            $imageUploader=new ImageUploader();
+            $imageUploader->saveImageToBase($model, 'kategorie');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -96,11 +94,8 @@ class KategoriaController extends Controller
         if ($model->load(Yii::$app->request->post()) ) {
             $model->obrazek = UploadedFile::getInstance($model, 'obrazek');
             if (null !== $model->obrazek) {
-                $image_name = $model->nazwa . rand(1, 4000) . '.' . $model->obrazek->getExtension();
-                $image_path = 'uploads/kategorie/' . $image_name;
-                $model->obrazek->saveAs($image_path);
-                $model->obrazek = $image_path;
-                $model->save();
+                $imageUploader=new ImageUploader();
+                $imageUploader->saveImageToBase($model, 'kategorie');
             } else {
                 $model->obrazek = $this->findModel($id)->obrazek;
                 $model->save();

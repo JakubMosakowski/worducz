@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\components\ImageUploader;
 use Yii;
 use app\models\Podkategoria;
 use app\models\PodkategoriaSearch;
@@ -75,11 +76,8 @@ class PodkategoriaController extends Controller
         $kategorie = ArrayHelper::map($kategorie, 'id', 'nazwa');
         if ($model->load(Yii::$app->request->post())) {
             $model->obrazek = UploadedFile::getInstance($model, 'obrazek');
-            $image_name = $model->nazwa . rand(1, 4000) . '.' . $model->obrazek->getExtension();
-            $image_path = 'uploads/podkategorie/' . $image_name;
-            $model->obrazek->saveAs($image_path);
-            $model->obrazek = $image_path;
-            $model->save();
+            $imageUploader=new ImageUploader();
+            $imageUploader->saveImageToBase($model, 'kategorie');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -106,11 +104,8 @@ class PodkategoriaController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->obrazek = UploadedFile::getInstance($model, 'obrazek');
             if (null !== $model->obrazek) {
-                $image_name = $model->nazwa . rand(1, 4000) . '.' . $model->obrazek->getExtension();
-                $image_path = 'uploads/podkategorie/' . $image_name;
-                $model->obrazek->saveAs($image_path);
-                $model->obrazek = $image_path;
-                $model->save();
+                $imageUploader=new ImageUploader();
+                $imageUploader->saveImageToBase($model, 'podkategorie');
             } else {
                 $model->obrazek = $this->findModel($id)->obrazek;
                 $model->save();

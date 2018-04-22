@@ -41,6 +41,7 @@ class Podkategoria extends \yii\db\ActiveRecord
             [['obrazek'], 'image', 'extensions'=>'jpeg,jpg,png,gif'],
             [['obrazek'],'required','on'=> 'create'],
             [['nazwa'], 'string', 'max' => 50],
+            [['nazwa'], 'match', 'pattern' => '/^[a-zA-Z]+$/', 'message'=>'W tym polu możesz podać jedynie litery.'],
             [['kategoria_id'], 'exist', 'skipOnError' => true, 'targetClass' => Kategoria::className(), 'targetAttribute' => ['kategoria_id' => 'id']],
         ];
     }
