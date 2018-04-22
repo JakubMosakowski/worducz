@@ -30,7 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'nazwa',
-            'opis',
+            [
+                'attribute' => 'opis',
+                'options'=>['style'=>'word-wrap:break-word;width:30px;']
+            ],
         ],
     ]) ?>
 

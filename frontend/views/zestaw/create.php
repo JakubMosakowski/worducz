@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Zestaw */
 
-$this->title = 'Create Zestaw';
-$this->params['breadcrumbs'][] = ['label' => 'Zestaws', 'url' => ['index']];
+$this->title = 'Utwórz zestaw';
+$this->params['breadcrumbs'][] = ['label' => 'Zestawy', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="zestaw-create">
@@ -16,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'podkategorie' =>$podkategorie,
     ]) ?>
 
 </div>

@@ -29,10 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'konto_id',
-            'jezyk1_id',
-            'jezyk2_id',
-            'podkategoria_id',
+            //'konto_id',
+            [
+                'label' => 'Twórca',
+                'attribute' => 'konto.username'
+            ],
+            //'jezyk1_id',
+            //'jezyk2_id',
+            [
+                'label' => 'Nazwa podkategorii',
+                'attribute' => 'podkategoria.nazwa'
+            ],
             'nazwa',
             'zestaw:ntext',
             'ilosc_slowek',

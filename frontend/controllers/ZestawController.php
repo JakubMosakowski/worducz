@@ -2,9 +2,13 @@
 
 namespace frontend\controllers;
 
+use app\models\Podkategoria;
+use common\components\StringConverter;
 use Yii;
 use app\models\Zestaw;
 use app\models\ZestawSearch;
+use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -20,6 +24,16 @@ class ZestawController extends Controller
     public function behaviors()
     {
         return [
+            'access'=>[
+                'class'=>AccessControl::className(),
+                'only' => ['create','update'],
+                'rules' =>[
+                    [
+                        'allow'=>true,
+                        'roles'=>['@']
+                    ],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -65,13 +79,21 @@ class ZestawController extends Controller
     public function actionCreate()
     {
         $model = new Zestaw();
+        $podkategorie = Podkategoria::find()
+            ->orderBy('nazwa')
+            ->all();
+        $podkategorie = ArrayHelper::map($podkategorie, 'id', 'nazwa');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->data_dodania=date('y-m-d h:m:s');
+            $this->setZestawValues($model);
+           return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'podkategorie'=>$podkategorie,
         ]);
     }
 
@@ -85,15 +107,23 @@ class ZestawController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $podkategorie = Podkategoria::find()
+            ->orderBy('nazwa')
+            ->all();
+        $podkategorie = ArrayHelper::map($podkategorie, 'id', 'nazwa');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        if ($model->load(Yii::$app->request->post()) ) {
+            $this->setZestawValues($model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
+            'podkategorie'=>$podkategorie,
         ]);
     }
+
 
     /**
      * Deletes an existing Zestaw model.
@@ -123,5 +153,19 @@ class ZestawController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    /**
+     * @param $model
+     */
+    public function setZestawValues($model)
+    {
+        $model->konto_id = Yii::$app->user->id;
+        $model->jezyk1_id = 1;
+        $model->jezyk2_id = 2;
+        $strc = new StringConverter();
+        $model->ilosc_slowek = $strc->countWords($model->zestaw);
+        $model->data_edycji = date('y-m-d h:m:s');
+        $model->save();
     }
 }
