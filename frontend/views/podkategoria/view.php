@@ -1,42 +1,23 @@
 <?php
 
+use common\components\ImageButtonsDisplayer;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Podkategoria */
 
-$this->title = $model->id;
+$this->title = $model->nazwa;
 $this->params['breadcrumbs'][] = ['label' => 'Podkategorie', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="podkategoria-view">
+<div class="podkategoria-view" align="center">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            [
-                'label' => 'Nazwa kategorii',
-                'attribute' => 'kategoria.nazwa'
-            ],
-            'nazwa',
-            'opis:ntext',
-            'obrazek:image',
-        ],
-    ]) ?>
+    <?php
+    $buttonsDisplayer = new ImageButtonsDisplayer('zestaw');
+    $rows = $buttonsDisplayer->getSetOfRowsWhere('podkategoria_id', $model->id);
+    // $buttonsDisplayer->showButtons($rows);
+    $buttonsDisplayer->showRawButtons($rows);
+    ?>
 
 </div>

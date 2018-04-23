@@ -35,7 +35,7 @@ class Kategoria extends \yii\db\ActiveRecord
             [['obrazek'], 'file','extensions'=>'jpeg,jpg,png,gif'],
             [['obrazek'],'required','on'=> 'create'],
             [['nazwa'], 'string', 'max' => 20],
-            [['nazwa'], 'match', 'pattern' => '/^[a-zA-Z]+$/', 'message'=>'W tym polu możesz podać jedynie litery.'],
+            [['nazwa'], 'match', 'pattern' => '/^[AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpRrSsŚśTtUuWwYyZzŹźŻż]*$/', 'message'=>'W tym polu możesz podać jedynie litery.'],
         ];
     }
 
