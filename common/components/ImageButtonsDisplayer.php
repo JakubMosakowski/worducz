@@ -4,7 +4,6 @@ namespace common\components;
 
 use Yii;
 use yii\db\Exception;
-use yii\debug\models\search\Log;
 
 class ImageButtonsDisplayer
 {
@@ -65,7 +64,7 @@ class ImageButtonsDisplayer
             if (!empty($obrazek)) {
                 $var = '<a href=' . $path . ' class="btn btn-link" role="button">
                             <div class="zestawContainer">
-                                    <img src=' . $obrazek . ' class="img-rounded" width="150" height="150"/>
+                                    <img src=' . $obrazek . ' class="img-rounded" width="200" height="200"/>
                                     <div class="centered">' . $nazwa . '</div>
                             </div>
                         </a>';

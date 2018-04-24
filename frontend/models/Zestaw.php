@@ -44,7 +44,7 @@ class Zestaw extends \yii\db\ActiveRecord
             [['konto_id', 'jezyk1_id', 'jezyk2_id', 'podkategoria_id', 'ilosc_slowek'], 'integer'],
             [['zestaw'], 'string'],
             [['data_dodania', 'data_edycji'], 'safe'],
-            [['nazwa'], 'string', 'max' => 100],
+            [['nazwa'], 'string', 'max' => 16],
             [['jezyk1_id'], 'exist', 'skipOnError' => true, 'targetClass' => Jezyk::className(), 'targetAttribute' => ['jezyk1_id' => 'id']],
             [['jezyk2_id'], 'exist', 'skipOnError' => true, 'targetClass' => Jezyk::className(), 'targetAttribute' => ['jezyk2_id' => 'id']],
             [['konto_id'], 'exist', 'skipOnError' => true, 'targetClass' => Konto::className(), 'targetAttribute' => ['konto_id' => 'id']],

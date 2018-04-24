@@ -1,13 +1,14 @@
 <?php
 
+use common\components\ArraysPrinter;
+use common\components\StringConverter;
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Zestaw */
 
 $this->title = $model->nazwa;
-$this->params['breadcrumbs'][] = ['label' => 'Zestaws', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Zestawy', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="zestaw-view" align="center">
@@ -15,37 +16,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?php
+        $sconv = new StringConverter();
+        $array = $sconv->convertStringToArray($model->zestaw);
+        ArraysPrinter::printTwoDimArray($array);
+        ?>
+        <?= Html::a('Angielski->Polski', ['lang1-lang2', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Polski->Angielski', ['lang2-lang1', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Mieszane', ['mix', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            //'konto_id',
-            [
-                'label' => 'Twórca',
-                'attribute' => 'konto.username'
-            ],
-            //'jezyk1_id',
-            //'jezyk2_id',
-            [
-                'label' => 'Nazwa podkategorii',
-                'attribute' => 'podkategoria.nazwa'
-            ],
-            'nazwa',
-            'zestaw:ntext',
-            'ilosc_slowek',
-            'data_dodania',
-            'data_edycji',
-        ],
-    ]) ?>
 
 </div>

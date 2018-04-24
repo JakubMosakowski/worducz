@@ -97,6 +97,23 @@ class ZestawController extends Controller
         ]);
     }
 
+    public function actionLang1Lang2($id){
+        return $this->render('lang1-lang2', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+    public function actionLang2Lang1($id){
+        return $this->render('lang2-lang1', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+    public function actionMix($id){
+        return $this->render('mix', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
+
     /**
      * Updates an existing Zestaw model.
      * If update is successful, the browser will be redirected to the 'view' page.
