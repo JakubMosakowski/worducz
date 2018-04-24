@@ -10,10 +10,10 @@ use yii\grid\GridView;
 $this->title = 'Zestawy';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="zestaw-lang1-lang2">
+<div class="zestaw-trybNauki">
 
 
-    <p>
+    <p>dssa
         <?php
 
         ?>

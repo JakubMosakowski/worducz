@@ -10,3 +10,9 @@
     text-align: center;
     color: black;
 }
+
+.separator{
+    width:50px;
+    height: auto;
+    display: inline-block;
+}

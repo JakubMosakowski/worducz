@@ -16,14 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?php
-        $sconv = new StringConverter();
-        $array = $sconv->convertStringToArray($model->zestaw);
-        ArraysPrinter::printTwoDimArray($array);
-        ?>
-        <?= Html::a('Angielski->Polski', ['lang1-lang2', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Polski->Angielski', ['lang2-lang1', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Mieszane', ['mix', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Tryb nauki', ['zestaw/tryb-nauki', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Tryb sprawdzania', ['zestaw/tryb-sprawdzania', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
 

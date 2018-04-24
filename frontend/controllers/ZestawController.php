@@ -112,6 +112,16 @@ class ZestawController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+    public function actionTrybNauki($id){
+        return $this->render('trybNauki', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+    public function actionTrybSprawdzania($id){
+        return $this->render('trybSprawdzania', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
 
     /**
