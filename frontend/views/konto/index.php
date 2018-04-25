@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\KontoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Kontos';
+$this->title = 'Konta';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="konto-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Konto', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Stwórz konto', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,12 +25,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'rola_id',
+            //'id',
+            //'rola_id',
             'imie',
             'nazwisko',
             'email:email',
-            //'username',
+            'username',
             //'auth_key',
             //'password_hash',
             //'password_reset_token',

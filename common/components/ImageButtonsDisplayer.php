@@ -7,7 +7,6 @@ use yii\db\Exception;
 
 class ImageButtonsDisplayer
 {
-
     private $tablename;
 
     function __construct($name)

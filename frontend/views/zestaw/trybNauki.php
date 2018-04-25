@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <button id="hideButton" onClick="hideButton()" class="btn btn-primary btn-lg">Pokaż zestaw</button>
 
 
-    <    class="buttonsSpacing" style="text-align: center">
+    <div class="buttonsSpacing" style="text-align: center">
         </br>
         <?= Html::a('Angielski => Polski', ['lang1-lang2', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <div class="separator"></div>

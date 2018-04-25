@@ -6,6 +6,7 @@ use common\components\ImageUploader;
 use Yii;
 use app\models\Kategoria;
 use app\models\KategoriaSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
@@ -22,6 +23,16 @@ class KategoriaController extends Controller
     public function behaviors()
     {
         return [
+            'access'=>[
+                'class'=>AccessControl::className(),
+                'only' => ['index','create','update'],
+                'rules' =>[
+                    [
+                        'allow'=>true,
+                        'roles'=>['@']
+                    ],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

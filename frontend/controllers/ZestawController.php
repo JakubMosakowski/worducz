@@ -26,7 +26,7 @@ class ZestawController extends Controller
         return [
             'access'=>[
                 'class'=>AccessControl::className(),
-                'only' => ['create','update'],
+                'only' => ['index','create','update'],
                 'rules' =>[
                     [
                         'allow'=>true,

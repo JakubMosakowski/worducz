@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\WynikSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Wyniks';
+$this->title = 'Wyniki';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="wynik-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Wynik', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Stwórz wynik', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'konto_id',
             'zestaw_id',
             'data_wyniku',

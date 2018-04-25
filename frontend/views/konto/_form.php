@@ -12,31 +12,19 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'rola_id')->textInput() ?>
+    <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+    <?= $form->field($model, 'imie')->textInput(['autofocus' => true]) ?>
+    <?= $form->field($model, 'nazwisko')->textInput(['autofocus' => true]) ?>
+    <?= $form->field($model, 'rola_id')->textInput(['autofocus' => true]) ?>
 
-    <?= $form->field($model, 'imie')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'email') ?>
 
-    <?= $form->field($model, 'nazwisko')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'password_reset_token')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'password')->passwordInput() ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Zapisz', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
     </div>
+
 
     <?php ActiveForm::end(); ?>
 

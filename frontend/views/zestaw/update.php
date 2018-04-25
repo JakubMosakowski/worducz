@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Zestaw */
 
-$this->title = 'Update Zestaw: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Zestaws', 'url' => ['index']];
+$this->title = 'Zaktualizuj zestaw: '.$model->nazwa;
+$this->params['breadcrumbs'][] = ['label' => 'Zestawy', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Aktualizuj';
 ?>
 <div class="zestaw-update">
 

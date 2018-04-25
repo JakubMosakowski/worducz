@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Rola */
 
-$this->title = 'Update Rola: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Rolas', 'url' => ['index']];
+$this->title = 'Zaktualizuj rolę: '.$model->nazwa;
+$this->params['breadcrumbs'][] = ['label' => 'Role', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Aktualizuj';
 ?>
 <div class="rola-update">
 

@@ -6,6 +6,7 @@ use common\components\ImageUploader;
 use Yii;
 use app\models\Podkategoria;
 use app\models\PodkategoriaSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -24,6 +25,16 @@ class PodkategoriaController extends Controller
     public function behaviors()
     {
         return [
+            'access'=>[
+                'class'=>AccessControl::className(),
+                'only' => ['index','create','update'],
+                'rules' =>[
+                    [
+                        'allow'=>true,
+                        'roles'=>['@']
+                    ],
+                ]
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [

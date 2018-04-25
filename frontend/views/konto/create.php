@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Konto */
 
-$this->title = 'Create Konto';
-$this->params['breadcrumbs'][] = ['label' => 'Kontos', 'url' => ['index']];
+$this->title = 'Stwórz konto';
+$this->params['breadcrumbs'][] = ['label' => 'Konta', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="konto-create">

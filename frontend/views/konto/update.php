@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Konto */
 
-$this->title = 'Update Konto: {nameAttribute}';
-$this->params['breadcrumbs'][] = ['label' => 'Kontos', 'url' => ['index']];
+$this->title = 'Zaktualizuj konto: '.$model->nazwa;
+$this->params['breadcrumbs'][] = ['label' => 'Konta', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Aktualizuj';
 ?>
 <div class="konto-update">
 

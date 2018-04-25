@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model app\models\Podkategoria */
 
 $this->title = 'Zaktualizuj podkategorię: '.$model->nazwa;
-$this->params['breadcrumbs'][] = ['label' => 'Podkategorias', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Podkategorie', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Aktualizuj';
 ?>
 <div class="podkategoria-update">
 
