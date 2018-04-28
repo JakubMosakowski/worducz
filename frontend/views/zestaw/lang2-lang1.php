@@ -11,5 +11,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="zestaw-lang2-lang1">
 
-
+    <p>
+        <?= $this->render('_formQuestion', [
+            'model' => $model,
+        ]) ?>
+    </p>
 </div>

@@ -14,9 +14,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <p>
-        <?php
-
-        ?>
+        <?= $this->render('_formQuestion', [
+            'model' => $model,
+        ]) ?>
     </p>
 
 

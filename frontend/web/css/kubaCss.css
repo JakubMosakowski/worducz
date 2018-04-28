@@ -16,3 +16,7 @@
     height: auto;
     display: inline-block;
 }
+.bigger_inputs{
+    width: 200px;
+    height: 500px;
+}
