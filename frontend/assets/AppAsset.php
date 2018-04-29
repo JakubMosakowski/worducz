@@ -16,6 +16,7 @@ class AppAsset extends AssetBundle
         'css/kubaCss.css',
     ];
     public $js = [
+        'js/refreshQuestionPage.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
