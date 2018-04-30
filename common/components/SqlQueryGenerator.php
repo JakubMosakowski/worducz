@@ -14,7 +14,7 @@ class SqlQueryGenerator
         $this->tablename = $name;
     }
 
-    public function getSetOfRowsOfTable()
+    public function getSetOfRows()
     {
         try {
             $rows = Yii::$app->db->createCommand('Select * FROM ' . $this->tablename)->queryAll();

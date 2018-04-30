@@ -1,5 +1,8 @@
 <?php
 
+use common\components\GraphFiller;
+use common\components\SqlQueryGenerator;
+use common\components\WynikFormatter;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use miloschuman\highcharts\Highcharts;
@@ -25,35 +28,33 @@ $this->params['breadcrumbs'][] = $this->title;
             'nazwisko',
             'email:email',
             'username',
-           // 'auth_key',
+            // 'auth_key',
             //'password_hash',
-           // 'password_reset_token',
+            // 'password_reset_token',
             //'status',
             //'created_at',
-           // 'updated_at',
+            // 'updated_at',
         ],
     ]) ?>
 
     <?php
-
-    $datesArray='sad';
-    $scoresArray='asd';
+    $graphFiller=new GraphFiller($model->id);
     echo Highcharts::widget([
         'options' => [
             'title' => ['text' => 'Twój progres'],
             'xAxis' => [
-                'categories' => ['Apples', 'Bananas', 'Oranges']
+                'title' => ['text' => 'Data/zestaw'],
+                'categories' => $graphFiller->resultArray,
             ],
             'yAxis' => [
                 'title' => ['text' => 'Zdobyte procenty']
             ],
             'series' => [
-                ['name' => $model->username, 'data' => [ 7, 3]]
+                ['name' => $model->username, 'data' => $graphFiller->scoresAsIntegers],
             ]
         ]
     ]);
     ?>
-
 
 
 </div>

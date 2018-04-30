@@ -10,7 +10,7 @@ $this->title = 'Nauka angielskiego';
     <?php
     $buttonsDisplayer = new ImageButtonsDisplayer('kategoria');
     $sqlGen=new \common\components\SqlQueryGenerator('kategoria');
-    $rows = $sqlGen->getSetOfRowsOfTable();
+    $rows = $sqlGen->getSetOfRows();
     $buttonsDisplayer->showButtons($rows);
     ?>
 
