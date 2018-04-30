@@ -9,7 +9,8 @@ $this->title = 'Nauka angielskiego';
 <div class="site-index" align="center">
     <?php
     $buttonsDisplayer = new ImageButtonsDisplayer('kategoria');
-    $rows = $buttonsDisplayer->getSetOfRowsOfTable();
+    $sqlGen=new \common\components\SqlQueryGenerator('kategoria');
+    $rows = $sqlGen->getSetOfRowsOfTable();
     $buttonsDisplayer->showButtons($rows);
     ?>
 

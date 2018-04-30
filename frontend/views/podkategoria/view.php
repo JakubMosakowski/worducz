@@ -14,7 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php
     $buttonsDisplayer = new ImageButtonsDisplayer('zestaw');
-    $rows = $buttonsDisplayer->getSetOfRowsWhere('podkategoria_id', $model->id);
+    $sqlGen=new \common\components\SqlQueryGenerator('zestaw');
+    $rows = $sqlGen->getSetOfRowsWhere('podkategoria_id', $model->id);
     $buttonsDisplayer->showRawButtons($rows);
     ?>
 

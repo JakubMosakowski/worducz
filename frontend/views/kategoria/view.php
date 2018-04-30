@@ -14,7 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="kategoria-view" align="center">
     <?php
     $buttonsDisplayer = new ImageButtonsDisplayer('podkategoria');
-    $rows = $buttonsDisplayer->getSetOfRowsWhere('kategoria_id', $model->id);
+    $sqlGen=new \common\components\SqlQueryGenerator('podkategoria');
+    $rows = $sqlGen->getSetOfRowsWhere('kategoria_id', $model->id);
     $buttonsDisplayer->showButtons($rows);
     ?>
 

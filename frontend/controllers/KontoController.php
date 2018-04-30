@@ -24,7 +24,7 @@ class KontoController extends Controller
         return [
             'access'=>[
                 'class'=>AccessControl::className(),
-                'only' => ['index','create','update'],
+                'only' => ['index','create','update','view'],
                 'rules' =>[
                     [
                         'allow'=>true,

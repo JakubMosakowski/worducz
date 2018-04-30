@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use miloschuman\highcharts\Highcharts;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Konto */
@@ -13,17 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="konto-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Aktualizuj', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Usuń', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Na pewno chcesz to usunąć?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -42,5 +33,27 @@ $this->params['breadcrumbs'][] = $this->title;
            // 'updated_at',
         ],
     ]) ?>
+
+    <?php
+
+    $datesArray='sad';
+    $scoresArray='asd';
+    echo Highcharts::widget([
+        'options' => [
+            'title' => ['text' => 'Twój progres'],
+            'xAxis' => [
+                'categories' => ['Apples', 'Bananas', 'Oranges']
+            ],
+            'yAxis' => [
+                'title' => ['text' => 'Zdobyte procenty']
+            ],
+            'series' => [
+                ['name' => $model->username, 'data' => [ 7, 3]]
+            ]
+        ]
+    ]);
+    ?>
+
+
 
 </div>
