@@ -52,7 +52,7 @@ use yii\widgets\ActiveForm;
         let description = document.getElementById("description");
         let forUser = document.getElementById("forUser");
         let forCode = document.getElementById("forCode");
-
+        let mix = false;
         var input = document.getElementById("forUser");
 
         // Execute a function when the user releases a key on the keyboard
@@ -65,7 +65,6 @@ use yii\widgets\ActiveForm;
                 document.getElementById("nextQuestionButton").click();
             }
         });
-
 
 
         Array.prototype.shuffle = function () {
@@ -98,6 +97,12 @@ use yii\widgets\ActiveForm;
                     text = 'Dobrze!';
                 }
                 counter++;
+                if(algorithmNo==3){
+                    let temp;
+                    temp=firstLang;
+                    firstLang=secondLang;
+                    secondLang=temp;
+                }
                 if (counter !== array.length) {
                     forCode.value = array[counter][firstLang];
                 } else {
@@ -111,13 +116,19 @@ use yii\widgets\ActiveForm;
 
         function finish(text) {
             userResult = userResult * 100 / array.length;
+            userResult = Math.round(userResult);
             text = 'Koniec';
             description.style.color = 'green';
             forCode.value = '';
-            swal("Gratulacje", 'Twój wynik to: ' + userResult + '%', "success").then((value) => {
+            var finishText='Twój wynik to: ' + userResult + '%';
+            if(typeof swal !== 'undefined') {
+                swal("Gratulacje", finishText, "success").then((value) => {
+                    history.go(-1);
+                });
+            }else {
+                alert(finishText);
                 history.go(-1);
-            });
-
+            }
 
             return text;
         }
@@ -170,8 +181,10 @@ use yii\widgets\ActiveForm;
                 document.getElementById('nextQuestionButton').onclick = algorithmNumber1;
             else if (algorithmNo == 2)
                 document.getElementById('nextQuestionButton').onclick = algorithmNumber2;
-            else
+            else {
+                mix = true;
                 document.getElementById('nextQuestionButton').onclick = algorithmNumber1;
+            }
         }
 
         function enterInitialValues() {
@@ -179,7 +192,6 @@ use yii\widgets\ActiveForm;
             firstLang =<?php echo $fLang ?>;
             algorithmNo =<?php echo $algNo ?>;
             setSecondLanguageValue();
-            initialArrayLen = array.length;
             setAlgorithm();
 
             forCode.value = array[0][firstLang];

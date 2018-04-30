@@ -11,7 +11,14 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="zestaw-mix">
     <h1 align="center"><?= Html::encode($this->title) ?></h1>
-
+    <?php
+    $alg = $_GET['alg'];
+    ?>
+    <?= $this->render('_formQuestion', [
+        'model' => $model,
+        'firstLang' => 1,
+        'algorithmNumber' => $alg,
+    ]) ?>
 
 
 
