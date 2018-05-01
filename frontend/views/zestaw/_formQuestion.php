@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Wynik;
 use common\components\StringConverter;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -17,6 +18,8 @@ use yii\widgets\ActiveForm;
     $array = $sconv->convertStringToArray($model->zestaw);
     $fLang = $firstLang;
     $algNo = $algorithmNumber;
+    $ifSave = $save;
+
     ?>
     <div class="grid-view">
         <div class="row" align="center" style="margin: 10% auto 0;">
@@ -53,6 +56,7 @@ use yii\widgets\ActiveForm;
         let forUser = document.getElementById("forUser");
         let forCode = document.getElementById("forCode");
         let mix = false;
+        let save;
         var input = document.getElementById("forUser");
 
         // Execute a function when the user releases a key on the keyboard
@@ -97,11 +101,11 @@ use yii\widgets\ActiveForm;
                     text = 'Dobrze!';
                 }
                 counter++;
-                if(algorithmNo==3){
+                if (algorithmNo == 3) {
                     let temp;
-                    temp=firstLang;
-                    firstLang=secondLang;
-                    secondLang=temp;
+                    temp = firstLang;
+                    firstLang = secondLang;
+                    secondLang = temp;
                 }
                 if (counter !== array.length) {
                     forCode.value = array[counter][firstLang];
@@ -120,14 +124,28 @@ use yii\widgets\ActiveForm;
             text = 'Koniec';
             description.style.color = 'green';
             forCode.value = '';
-            var finishText='Twój wynik to: ' + userResult + '%';
-            if(typeof swal !== 'undefined') {
+            let finishText = 'Twój wynik to: ' + userResult + '%';
+            if (typeof swal !== 'undefined') {
                 swal("Gratulacje", finishText, "success").then((value) => {
-                    history.go(-1);
+                    if (save == 1) {
+                        let url = document.referrer;
+                        url += '&save='+userResult;
+                        window.location.href=url;
+                    }
+                    else
+                        history.go(-1);
+
+
                 });
-            }else {
+            } else {
                 alert(finishText);
-                history.go(-1);
+                if (save == 1) {
+                    let url = document.referrer;
+                    url += '&save='+userResult;
+                    window.location.href=url;
+                }
+                else
+                    history.go(-1);
             }
 
             return text;
@@ -191,6 +209,7 @@ use yii\widgets\ActiveForm;
             shuffleArray();
             firstLang =<?php echo $fLang ?>;
             algorithmNo =<?php echo $algNo ?>;
+            save =<?php echo $ifSave ?>;
             setSecondLanguageValue();
             setAlgorithm();
 

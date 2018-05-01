@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Wynik;
 use common\components\StringConverter;
 use yii\helpers\Html;
 use yii\grid\GridView;
@@ -13,11 +14,23 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="zestaw-trybNauki" align="center">
     <h1 align="center"><?= Html::encode($this->title) ?></h1>
     <br><br>
-    <a href="index.php?r=zestaw%2Flang1-lang2&id=<?php echo $model->id ?>&alg=1" class="btn btn-primary" role="button"
+    <a href="index.php?r=zestaw%2Flang1-lang2&id=<?php echo $model->id ?>&alg=1&save=1" class="btn btn-primary" role="button"
        style="margin-right: 15px">Angielski => Polski</a>
-    <a href="index.php?r=zestaw%2Fmix&id=<?php echo $model->id ?>&alg=3" class="btn btn-primary" role="button"
+    <a href="index.php?r=zestaw%2Fmix&id=<?php echo $model->id ?>&alg=3&save=1" class="btn btn-primary" role="button"
        style="margin-right: 15px">Mieszane</a>
-    <a href="index.php?r=zestaw%2Flang2-lang1&id=<?php echo $model->id ?>&alg=1" class="btn btn-primary" role="button"
+    <a href="index.php?r=zestaw%2Flang2-lang1&id=<?php echo $model->id ?>&alg=1&save=1" class="btn btn-primary" role="button"
        style="margin-right: 15px">Polski => Angielski</a>
 
+    <?php
+    if(isset($_GET["save"])) {
+        if(!Yii::$app->user->isGuest) {
+            $modelWynik = new Wynik();
+            $modelWynik->zestaw_id = $model->id;
+            $modelWynik->konto_id = Yii::$app->user->id;
+            $modelWynik->data_wyniku = date('y-m-d');
+            $modelWynik->wynik = $_GET["save"];
+            $modelWynik->save();
+        }
+    }
+    ?>
 </div>

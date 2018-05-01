@@ -13,15 +13,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
     <h1 align="center"><?= Html::encode($this->title) ?></h1>
-
     <?php
-        $alg = $_GET['alg'];
-        ?>
-        <?= $this->render('_formQuestion', [
-            'model' => $model,
-            'firstLang' => 1,
-            'algorithmNumber' => $alg,
-        ]) ?>
+    $alg = $_GET['alg'];
+    $save = $_GET['save'];
+
+    ?>
+    <?= $this->render('_formQuestion', [
+        'model' => $model,
+        'firstLang' => 1,
+        'algorithmNumber' => $alg,
+        'save' => $save,
+    ]) ?>
 
     </p>
 </div>
