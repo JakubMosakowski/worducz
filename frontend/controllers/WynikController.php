@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\components\Authenticator;
+use common\components\Constants;
 use Yii;
 use app\models\Wynik;
 use app\models\WynikSearch;
@@ -27,7 +29,9 @@ class WynikController extends Controller
                 'rules' =>[
                     [
                         'allow'=>true,
-                        'roles'=>['@']
+                        'matchCallback'=>function($rule,$action){
+                            return Authenticator::checkIfRola(Constants::ADMIN_ID);
+                        }
                     ],
                 ]
             ],

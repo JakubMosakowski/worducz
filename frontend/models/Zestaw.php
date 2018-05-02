@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "zestaw".
  *
  * @property int $id
+ * @property int $prywatne
  * @property int $konto_id
  * @property int $jezyk1_id
  * @property int $jezyk2_id

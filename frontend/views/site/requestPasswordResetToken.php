@@ -7,13 +7,13 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
-$this->title = 'Request password reset';
+$this->title = 'Zresetuj hasło';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-request-password-reset">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Proszę podaj swój email. Link do zmiany hasła dosaniesz na tego mail-a.</p>
+    <p>Proszę podaj swój email. Link do zmiany hasła dostaniesz na tego mail-a.</p>
 
     <div class="row">
         <div class="col-lg-5">
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'email')->textInput(['autofocus' => true]) ?>
 
                 <div class="form-group">
-                    <?= Html::submitButton('Send', ['class' => 'btn btn-primary']) ?>
+                    <?= Html::submitButton('Wyślij', ['class' => 'btn btn-primary']) ?>
                 </div>
 
             <?php ActiveForm::end(); ?>

@@ -2,6 +2,8 @@
 
 namespace common\components;
 
+use app\models\Podkategoria;
+use app\models\Uprawnienia;
 use Yii;
 use yii\db\Exception;
 
@@ -12,6 +14,19 @@ class SqlQueryGenerator
     function __construct($name)
     {
         $this->tablename = $name;
+    }
+
+    public static function getUprawnionePodkategorie()
+    {
+        $uprawnienia = Uprawnienia::find()->where(['konto_id' => Yii::$app->user->identity->getId()])->all();
+        $allUprawnienia[] = 0;
+        foreach ($uprawnienia as &$upraw) {
+            $allUprawnienia[] = $upraw['podkategoria_id'];
+        }
+        $podkategorie = Podkategoria::find()
+            ->where(['in', 'id', $allUprawnienia])->all();
+
+        return $podkategorie;
     }
 
     public function getSetOfRows()

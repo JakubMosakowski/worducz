@@ -221,10 +221,17 @@ use yii\widgets\ActiveForm;
             array.shuffle();
         }
 
+        function reformatingText(val){
+            val=val.toUpperCase();
+            val=val.trim();
+            val=val.replace(/\s{2,}/g, ' ');
+
+            return val;
+        }
 
         function isCorrect(correct, userInput) {
-            correct = correct.toUpperCase();
-            userInput = userInput.toUpperCase();
+            correct=reformatingText(correct);
+            userInput=reformatingText(userInput);
 
             let result = correct.localeCompare(userInput);
             if (result)

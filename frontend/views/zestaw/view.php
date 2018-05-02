@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Konto;
 use common\components\ArraysPrinter;
 use common\components\StringConverter;
 use yii\helpers\Html;
@@ -14,7 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="zestaw-view" align="center">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Tryb nauki', ['zestaw/tryb-nauki', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Tryb sprawdzania', ['zestaw/tryb-sprawdzania', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

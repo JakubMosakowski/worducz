@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Uprawnienia;
 use yii\helpers\Html;
 
 

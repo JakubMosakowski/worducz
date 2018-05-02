@@ -26,7 +26,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            //'konto_id',
+            [
+                'label' => 'Autor',
+                'attribute' => 'konto.username'
+            ],
             //'jezyk1_id',
             //'jezyk2_id',
             [

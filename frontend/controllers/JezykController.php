@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\components\Authenticator;
+use common\components\Constants;
 use Yii;
 use app\models\Jezyk;
 use app\models\JezykSearch;
@@ -25,10 +27,10 @@ class JezykController extends Controller
                 'class'=>AccessControl::className(),
                 'only' => ['index','create','update','view'],
                 'rules' =>[
-                    [
-                        'allow'=>true,
-                        'roles'=>['@']
-                    ],
+                    'allow'=>true,
+                    'matchCallback'=>function($rule,$action){
+                        return Authenticator::checkIfRola(Constants::ADMIN_ID);
+                    }
                 ]
             ],
             'verbs' => [

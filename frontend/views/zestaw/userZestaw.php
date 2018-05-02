@@ -1,15 +1,17 @@
 <?php
 
+use common\components\StringConverter;
 use yii\helpers\Html;
+use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Zestaw */
-/* @var $form yii\widgets\ActiveForm */
+
+$this->title = 'Dodaj zestaw';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-
-<div class="zestaw-form">
-
+<div class="zestaw-userZestaw">
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'nazwa')->textInput(['maxlength' => true]) ?>
 
@@ -25,5 +27,6 @@ use yii\widgets\ActiveForm;
     </div>
 
     <?php ActiveForm::end(); ?>
+
 
 </div>

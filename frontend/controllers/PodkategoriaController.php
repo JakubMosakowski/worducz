@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\components\Authenticator;
+use common\components\Constants;
 use common\components\ImageUploader;
 use Yii;
 use app\models\Podkategoria;
@@ -31,7 +33,9 @@ class PodkategoriaController extends Controller
                 'rules' =>[
                     [
                         'allow'=>true,
-                        'roles'=>['@']
+                        'matchCallback'=>function($rule,$action){
+                            return Authenticator::checkIfRola(Constants::ADMIN_ID);
+                        }
                     ],
                 ]
             ],

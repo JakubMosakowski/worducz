@@ -3,15 +3,19 @@
 namespace frontend\controllers;
 
 use app\models\Podkategoria;
-use common\components\StringConverter;
-use Yii;
+use app\models\Uprawnienia;
 use app\models\Zestaw;
 use app\models\ZestawSearch;
+use common\components\Authenticator;
+use common\components\Constants;
+use common\components\SqlQueryGenerator;
+use common\components\StringConverter;
+use Yii;
 use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * ZestawController implements the CRUD actions for Zestaw model.
@@ -24,13 +28,49 @@ class ZestawController extends Controller
     public function behaviors()
     {
         return [
-            'access'=>[
-                'class'=>AccessControl::className(),
-                'only' => ['index','create','update'],
-                'rules' =>[
+            'access' =>
+                [
+                    'class' => AccessControl::className(),
+                    'only' => ['user-zestaw'],
+                    'rules' => [
+                        [
+                            'allow' => true,
+                            'actions'=>['user-zestaw'],
+                            'roles'=>['@'],
+                        ],
+                    ]
+                ],
+                [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'create'],
+                'rules' => [
                     [
-                        'allow'=>true,
-                        'roles'=>['@']
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            return Authenticator::checkIfRola(Constants::ADMIN_ID) ||
+                                Authenticator::checkIfRola(Constants::REDAKTOR_ID) ||
+                                Authenticator::checkIfRola(Constants::SUPER_REDAKTOR_ID);
+                        }
+                    ],
+                ]
+            ],
+            [
+                'class' => AccessControl::className(),
+                'only' => ['update'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            if (Authenticator::checkIfRola(Constants::ADMIN_ID) ||
+                                Authenticator::checkIfAuthor())
+                                return true;
+
+                            if (Authenticator::checkIfRola(Constants::SUPER_REDAKTOR_ID) &&
+                                Authenticator::checkIfHasPermission())
+                                return true;
+
+                            return false;
+                        }
                     ],
                 ]
             ],
@@ -71,6 +111,27 @@ class ZestawController extends Controller
         ]);
     }
 
+    public function actionUserZestaw()
+    {
+        $model = new Zestaw();
+            $podkategorie = Podkategoria::find()
+                ->orderBy('nazwa')
+                ->all();
+        $podkategorie = ArrayHelper::map($podkategorie, 'id', 'nazwa');
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->data_dodania = date('y-m-d h:m:s');
+            $model->prywatne=true;
+            $this->setZestawValues($model);
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+            'podkategorie' => $podkategorie,
+        ]);
+    }
+
     /**
      * Creates a new Zestaw model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -79,45 +140,57 @@ class ZestawController extends Controller
     public function actionCreate()
     {
         $model = new Zestaw();
-        $podkategorie = Podkategoria::find()
-            ->orderBy('nazwa')
-            ->all();
+        if (Authenticator::checkIfRola(Constants::ADMIN_ID)) {
+            $podkategorie = Podkategoria::find()
+                ->orderBy('nazwa')
+                ->all();
+        } else {
+            $podkategorie = SqlQueryGenerator::getUprawnionePodkategorie();
+        }
         $podkategorie = ArrayHelper::map($podkategorie, 'id', 'nazwa');
 
-
-        if ($model->load(Yii::$app->request->post()) ) {
-            $model->data_dodania=date('y-m-d h:m:s');
+        if ($model->load(Yii::$app->request->post())) {
+            $model->data_dodania = date('y-m-d h:m:s');
             $this->setZestawValues($model);
-           return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'podkategorie'=>$podkategorie,
+            'podkategorie' => $podkategorie,
         ]);
     }
 
-    public function actionLang1Lang2($id){
+    public function actionLang1Lang2($id)
+    {
         return $this->render('lang1-lang2', [
             'model' => $this->findModel($id),
         ]);
     }
-    public function actionLang2Lang1($id){
+
+    public function actionLang2Lang1($id)
+    {
         return $this->render('lang2-lang1', [
             'model' => $this->findModel($id),
         ]);
     }
-    public function actionMix($id){
+
+    public function actionMix($id)
+    {
         return $this->render('mix', [
             'model' => $this->findModel($id),
         ]);
     }
-    public function actionTrybNauki($id){
+
+    public function actionTrybNauki($id)
+    {
         return $this->render('trybNauki', [
             'model' => $this->findModel($id),
         ]);
     }
-    public function actionTrybSprawdzania($id){
+
+    public function actionTrybSprawdzania($id)
+    {
         return $this->render('trybSprawdzania', [
             'model' => $this->findModel($id),
         ]);
@@ -140,14 +213,14 @@ class ZestawController extends Controller
         $podkategorie = ArrayHelper::map($podkategorie, 'id', 'nazwa');
 
 
-        if ($model->load(Yii::$app->request->post()) ) {
+        if ($model->load(Yii::$app->request->post())) {
             $this->setZestawValues($model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
             'model' => $model,
-            'podkategorie'=>$podkategorie,
+            'podkategorie' => $podkategorie,
         ]);
     }
 
@@ -161,9 +234,16 @@ class ZestawController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if (Authenticator::checkIfAuthorWithId($id) ||
+            Authenticator::checkIfRola(Constants::ADMIN_ID)) {
+            $this->findModel($id)->delete();
+        }
+        if (Authenticator::checkIfHasPermissionWithId($id) &&
+            Authenticator::checkIfRola(Constants::SUPER_REDAKTOR_ID))
+            $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+
     }
 
     /**

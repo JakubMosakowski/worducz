@@ -42,7 +42,7 @@ class Konto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['rola_id', 'imie', 'nazwisko', 'email', 'username', 'auth_key', 'password_hash', 'password_reset_token', 'status', 'created_at', 'updated_at'], 'required'],
+            [['rola_id', 'email', 'username', 'auth_key', 'password_hash', 'status', 'created_at', 'updated_at'], 'required'],
             [['rola_id', 'status', 'created_at', 'updated_at'], 'integer'],
             [['imie'], 'string', 'max' => 20],
             [['nazwisko'], 'string', 'max' => 30],

@@ -2,6 +2,9 @@
 
 namespace frontend\controllers;
 
+use app\models\Konto;
+use common\components\Authenticator;
+use common\components\Constants;
 use common\components\ImageUploader;
 use Yii;
 use app\models\Kategoria;
@@ -29,7 +32,9 @@ class KategoriaController extends Controller
                 'rules' =>[
                     [
                         'allow'=>true,
-                        'roles'=>['@']
+                        'matchCallback'=>function($rule,$action){
+                            return Authenticator::checkIfRola(Constants::ADMIN_ID);
+                        }
                     ],
                 ]
             ],
