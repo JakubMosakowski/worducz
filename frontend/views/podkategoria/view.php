@@ -16,8 +16,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php
     $buttonsDisplayer = new ImageButtonsDisplayer('zestaw');
     $sqlGen=new \common\components\SqlQueryGenerator('zestaw');
-    $rows = $sqlGen->getSetOfRowsWhere('podkategoria_id', $model->id);
-    $buttonsDisplayer->showRawButtons($rows);
+
+    $rows1=$sqlGen->getZestawPublic($model->id);
+    $buttonsDisplayer->showRawButtons($rows1);
+
+    if(!Yii::$app->user->isGuest){
+        $rows2=$sqlGen->getZestawMatching(Yii::$app->user->identity->getId(),$model->id);
+        $buttonsDisplayer->showRawButtons($rows2);
+    }
     ?>
 
 </div>

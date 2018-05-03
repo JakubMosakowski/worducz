@@ -18,6 +18,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="konto-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <div align="center" style="margin-bottom: 30px">
+        <?= Html::a('Obejrzyj swoje zestawy', ['/konto/user-zestawy'], ['class'=>'btn btn-primary']) ?>
+
+    </div>
+
+
 
     <?= DetailView::widget([
         'model' => $model,

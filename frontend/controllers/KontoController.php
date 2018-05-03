@@ -2,12 +2,14 @@
 
 namespace frontend\controllers;
 
+use app\models\Zestaw;
 use common\components\Authenticator;
 use common\components\Constants;
 use frontend\models\SignupForm;
 use Yii;
 use app\models\Konto;
 use app\models\KontoSearch;
+use yii\data\ActiveDataProvider;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -29,8 +31,8 @@ class KontoController extends Controller
                 'only' => ['index', 'create', 'update'],
                 'rules' => [
                     [
-                        'allow'=>true,
-                        'matchCallback'=>function($rule,$action){
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
                             return Authenticator::checkIfRola(Constants::ADMIN_ID);
                         }
                     ],
@@ -38,7 +40,7 @@ class KontoController extends Controller
             ],
             [
                 'class' => AccessControl::className(),
-                'only' => ['view'],
+                'only' => ['view', 'user-zestawy'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -65,6 +67,20 @@ class KontoController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionUserZestawy()
+    {
+        $searchModel = new KontoSearch();
+        $query = Zestaw::find()->where(['konto_id'=>Yii::$app->user->identity->getId()]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        return $this->render('user-zestawy', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -122,6 +138,19 @@ class KontoController extends Controller
         ]);
     }
 
+    public function actionUpdateZestawy($id)
+    {
+        $model = Zestaw::findOne($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['user-zestawy']);
+        }
+
+        return $this->render('update-zestawy', [
+            'model' => $model,
+        ]);
+    }
+
     /**
      * Deletes an existing Konto model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -136,6 +165,12 @@ class KontoController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionDeleteZestawy($id)
+    {
+        Zestaw::findOne($id)->delete();
+
+        return $this->redirect(['user-zestawy']);
+    }
     /**
      * Finds the Konto model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

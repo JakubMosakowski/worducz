@@ -126,7 +126,7 @@ class ZestawController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
+        return $this->render('userZestaw', [
             'model' => $model,
             'podkategorie' => $podkategorie,
         ]);
@@ -238,7 +238,7 @@ class ZestawController extends Controller
             Authenticator::checkIfRola(Constants::ADMIN_ID)) {
             $this->findModel($id)->delete();
         }
-        if (Authenticator::checkIfHasPermissionWithId($id) &&
+        else if (Authenticator::checkIfHasPermissionWithId($id) &&
             Authenticator::checkIfRola(Constants::SUPER_REDAKTOR_ID))
             $this->findModel($id)->delete();
 

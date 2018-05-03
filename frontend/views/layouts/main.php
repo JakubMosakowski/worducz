@@ -31,22 +31,29 @@ AppAsset::register($this);
 <?php $this->beginBody() ?>
 
 <div class="wrap">
+
     <?php
     NavBar::begin([
         'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
+            ''
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Strona główna', 'url' => ['/site/index']],
-    ];
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Rejestracja', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Logowanie', 'url' => ['/site/login']];
     } else {
         $menuItems[] = ['label' => 'Twoje konto', 'url' => ['/konto/view','id'=>Yii::$app->user->identity->getId()]];
+
+        $id = Yii::$app->user->identity->getId();
+        $konto = Konto::findOne($id);
+        if($konto->rola_id!==Constants::USER_ID){
+            $menuItems[]= ['label' => 'Dodaj zestaw', 'url' => ['zestaw/create']];
+        }
+            $menuItems[]= ['label' => 'Dodaj prywatny zestaw', 'url' => ['zestaw/user-zestaw']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -55,13 +62,6 @@ AppAsset::register($this);
             )
             . Html::endForm()
             . '</li>';
-        $id = Yii::$app->user->identity->getId();
-        $konto = Konto::findOne($id);
-        if($konto->rola_id!==Constants::USER_ID){
-            $menuItems[]= ['label' => 'Dodaj zestaw', 'url' => ['zestaw/create']];
-        }else{
-            $menuItems[]= ['label' => 'Dodaj prywatny zestaw', 'url' => ['zestaw/user-zestaw']];
-        }
     }
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],

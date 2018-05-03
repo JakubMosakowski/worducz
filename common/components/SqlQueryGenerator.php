@@ -48,4 +48,22 @@ class SqlQueryGenerator
         }
         return $rows;
     }
+
+    public function getZestawPublic($id_podkategoria){
+        try {
+            $rows = Yii::$app->db->createCommand('Select * FROM  zestaw  WHERE  prywatne=0 AND podkategoria_id='.$id_podkategoria)->queryAll();
+        } catch (Exception $e) {
+
+        }
+        return $rows;
+    }
+
+    public function getZestawMatching($id_konto,$id_podkategoria){
+        try {
+            $rows = Yii::$app->db->createCommand('Select * FROM  zestaw  WHERE  prywatne=1 AND konto_id='.$id_konto.' AND podkategoria_id='.$id_podkategoria)->queryAll();
+        } catch (Exception $e) {
+
+        }
+        return $rows;
+    }
 }
