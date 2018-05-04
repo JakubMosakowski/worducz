@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Stwórz język', ['create'], ['class' => 'btn btn-success']) ?>
+        Test echo
     </p>
 
     <?= GridView::widget([
