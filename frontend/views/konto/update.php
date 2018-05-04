@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 
 $this->title = 'Zaktualizuj konto: '.$model->username;
 $this->params['breadcrumbs'][] = ['label' => 'Konta', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->username]];
 $this->params['breadcrumbs'][] = 'Aktualizuj';
 ?>
 <div class="konto-update">

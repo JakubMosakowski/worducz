@@ -27,7 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'id',
             'nazwa',
-            'opis:ntext',
+            [
+                'attribute' => 'opis',
+                'contentOptions' => ['style' => 'width: 50%; overflow: auto;word-wrap: break-word;white-space:pre-line;'],
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

@@ -7,8 +7,8 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\Zestaw */
 
 $this->title = 'Zaktualizuj zestaw: '.$model->nazwa;
-$this->params['breadcrumbs'][] = ['label' => 'Konta', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => Yii::$app->user->identity->username, 'url' => ['view', 'id' => Yii::$app->user->identity->getId()]];
+$this->params['breadcrumbs'][] = ['label' => 'Twoje zestawy', 'url' => 'user-zestawy'];
 $this->params['breadcrumbs'][] = 'Aktualizuj';
 ?>
 <div class="konto-update-zestawy">

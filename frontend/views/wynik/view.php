@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Wynik */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Wyniks', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Wyniki', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="wynik-view">
@@ -29,8 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             //'id',
-            //'konto_id',
-            //'zestaw_id',
+            [
+                'label' => 'Uzytkownik',
+                'attribute' => 'konto.username'
+            ],
+            [
+                'label' => 'Zestaw',
+                'attribute' => 'zestaw.nazwa'
+            ],
             'data_wyniku',
             'wynik',
         ],

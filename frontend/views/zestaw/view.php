@@ -1,6 +1,8 @@
 <?php
 
+use app\models\Kategoria;
 use app\models\Konto;
+use app\models\Podkategoria;
 use common\components\ArraysPrinter;
 use common\components\StringConverter;
 use yii\helpers\Html;
@@ -9,7 +11,12 @@ use yii\helpers\Html;
 /* @var $model app\models\Zestaw */
 
 $this->title = $model->nazwa;
-$this->params['breadcrumbs'][] = ['label' => 'Zestawy', 'url' => ['index']];
+$podkategoriaNazwa=Podkategoria::findOne($model->podkategoria_id)->nazwa;
+$kategoriaId=Podkategoria::findOne($model->podkategoria_id)->kategoria_id;
+$kategoriaNazwa=Kategoria::findOne($kategoriaId)->nazwa;
+$this->params['breadcrumbs'][] = ['label' => $kategoriaNazwa, 'url' => ['/kategoria/view', 'id' => $kategoriaId]];
+$this->params['breadcrumbs'][] = ['label' => $podkategoriaNazwa, 'url' => ['/podkategoria/view', 'id' => $model->podkategoria_id]];
+
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="zestaw-view" align="center">

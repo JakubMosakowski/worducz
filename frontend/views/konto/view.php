@@ -12,7 +12,6 @@ use miloschuman\highcharts\Highcharts;
 /* @var $model app\models\Konto */
 
 $this->title = $model->username;
-$this->params['breadcrumbs'][] = ['label' => 'Konta', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="konto-view">

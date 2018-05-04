@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Wynik */
 
-$this->title = 'Zaktualizuj wynik: '.$model->nazwa;
+$this->title = 'Zaktualizuj wynik: '.$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Wyniki', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Aktualizuj';

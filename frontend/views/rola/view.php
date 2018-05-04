@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Rola */
 
 $this->title = $model->nazwa;
-$this->params['breadcrumbs'][] = ['label' => 'Rolas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Role', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="rola-view">
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nazwa',
             [
                 'attribute' => 'opis',
-                'options'=>['style'=>'word-wrap:break-word;width:30px;']
+                'contentOptions' => ['style' => 'width: 80%; overflow: auto;word-wrap: break-word;white-space:pre-line;'],
             ],
         ],
     ]) ?>

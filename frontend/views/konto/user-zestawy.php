@@ -9,6 +9,7 @@ use yii\helpers\Url;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Twoje zestawy';
+$this->params['breadcrumbs'][] = ['label' => Yii::$app->user->identity->username, 'url' => ['view', 'id' => Yii::$app->user->identity->getId()]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="konto-user-zestawy">
@@ -49,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 'urlCreator' => function ($action, $model, $key, $index) {
                     if ($action == 'update') {
-                        $url = 'index.php?r=konto/update-zestawy&id=' . $model->id;
+                        $url = '/konto/update-zestawy?id=' . $model->id;
                         return $url;
                     }
                 }

@@ -10,7 +10,6 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Kategoria */
 
 $this->title = $model->nazwa;
-$this->params['breadcrumbs'][] = ['label' => 'Kategorie', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kategoria-view" align="center">

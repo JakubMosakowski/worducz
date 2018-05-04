@@ -8,7 +8,7 @@ use yii\helpers\Html;
 $this->title = 'Zaktualizuj uprawnienia:';
 $this->params['breadcrumbs'][] = ['label' => 'Uprawnienia', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->konto_id, 'url' => ['view', 'konto_id' => $model->konto_id, 'podkategoria_id' => $model->podkategoria_id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Aktualizuj';
 ?>
 <div class="uprawnienia-update">
 

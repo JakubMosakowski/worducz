@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Kategoria;
 use common\components\ImageButtonsDisplayer;
 use yii\helpers\Html;
 
@@ -8,7 +9,8 @@ use yii\helpers\Html;
 /* @var $model app\models\Podkategoria */
 
 $this->title = $model->nazwa;
-$this->params['breadcrumbs'][] = ['label' => 'Podkategorie', 'url' => ['index']];
+$kategoriaNazwa=Kategoria::findOne($model->kategoria_id)->nazwa;
+$this->params['breadcrumbs'][] = ['label' => $kategoriaNazwa, 'url' => ['/kategoria/view', 'id' => $model->kategoria_id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="podkategoria-view" align="center">
