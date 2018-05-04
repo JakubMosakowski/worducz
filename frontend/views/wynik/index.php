@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             //'id',
             [
-                'label' => 'Uzytkownik',
+                'label' => 'Użytkownik',
                 'attribute' => 'konto.username'
             ],
             [

@@ -38,11 +38,6 @@ class Authenticator
         return false;
     }
 
-    public static function checkIfHasPermissionWithId($id)
-    {
-        return self::checkPermission($id);
-    }
-
     private static function checkPermission($id_zestaw)
     {
         $zestaw = Zestaw::findOne($id_zestaw);
@@ -66,16 +61,12 @@ class Authenticator
         return false;
     }
 
-    public static function checkIfAuthorWithId($id)
-    {
-        $zestaw = Zestaw::findOne($id);
-        $author_id = $zestaw->konto_id;
-        return self::checkAuthor($author_id);
-    }
 
-    private static function checkAuthor($id)
+    private static function checkAuthor($zestaw_id)
     {
-        if ($id == Yii::$app->user->identity->getId())
+        $zestaw=Zestaw::findOne($zestaw_id);
+        $author_id=$zestaw->konto_id;
+        if ($author_id == Yii::$app->user->identity->getId())
             return true;
         else
             return false;

@@ -52,8 +52,8 @@ class SignupFormTest extends \Codeception\Test\Unit
         expect_that($model->getErrors('email'));
 
         expect($model->getFirstError('username'))
-            ->equals('This username has already been taken.');
+            ->equals('Ta nazwa użytkownika jest już zajęta.');
         expect($model->getFirstError('email'))
-            ->equals('This email address has already been taken.');
+            ->equals('Ten email jest już zajęty.');
     }
 }

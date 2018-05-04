@@ -19,15 +19,16 @@ $this->params['breadcrumbs'][] = ['label' => $podkategoriaNazwa, 'url' => ['/pod
 $this->params['breadcrumbs'][] = ['label' => $model->nazwa, 'url' => ['/zestaw/view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="zestaw-trybNauki" align="center">
+<div class="zestaw-trybSprawdzenia" align="center">
     <h1 align="center"><?= Html::encode($this->title) ?></h1>
+    <h3 align="center">Wybierz sposób sprawdzania Twojej wiedzy:</h3>
     <br><br>
-    <a href="/zestaw/lang1-lang2?id=<?php echo $model->id ?>&alg=1&save=1" class="btn btn-primary" role="button"
-       style="margin-right: 15px">Angielski => Polski</a>
-    <a href="/zestaw/mix?id=<?php echo $model->id ?>&alg=3&save=1" class="btn btn-primary" role="button"
-       style="margin-right: 15px">Mieszane</a>
-    <a href="/zestaw/lang2-lang1?id=<?php echo $model->id ?>&alg=1&save=1" class="btn btn-primary" role="button"
-       style="margin-right: 15px">Polski => Angielski</a>
+    <a href="/zestaw/lang1-lang2?id=<?php echo $model->id ?>&alg=1&save=1" class="btn btn-primary btn-lg" role="button"
+       style="margin-right: 15px">Z angielskiego na polski</a>
+    <a href="/zestaw/lang2-lang1?id=<?php echo $model->id ?>&alg=1&save=1" class="btn btn-primary btn-lg" role="button"
+       style="margin-right: 15px">Z polskiego na angielski</a>
+    <a href="/zestaw/mix?id=<?php echo $model->id ?>&alg=3&save=1" class="btn btn-primary btn-lg" role="button"
+       style="margin-right: 15px">Wersja mieszana</a>
 
     <?php
     if(isset($_GET["save"])) {

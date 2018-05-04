@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use app\models\Podkategoria;
 use app\models\Uprawnienia;
+use app\models\Wynik;
 use app\models\Zestaw;
 use app\models\ZestawSearch;
 use common\components\Authenticator;
@@ -35,12 +36,12 @@ class ZestawController extends Controller
                     'rules' => [
                         [
                             'allow' => true,
-                            'actions'=>['user-zestaw'],
-                            'roles'=>['@'],
+                            'actions' => ['user-zestaw'],
+                            'roles' => ['@'],
                         ],
                     ]
                 ],
-                [
+            [
                 'class' => AccessControl::className(),
                 'only' => ['index', 'create'],
                 'rules' => [
@@ -114,14 +115,14 @@ class ZestawController extends Controller
     public function actionUserZestaw()
     {
         $model = new Zestaw();
-            $podkategorie = Podkategoria::find()
-                ->orderBy('nazwa')
-                ->all();
+        $podkategorie = Podkategoria::find()
+            ->orderBy('nazwa')
+            ->all();
         $podkategorie = ArrayHelper::map($podkategorie, 'id', 'nazwa');
 
         if ($model->load(Yii::$app->request->post())) {
             $model->data_dodania = date('y-m-d h:m:s');
-            $model->prywatne=true;
+            $model->prywatne = true;
             $this->setZestawValues($model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -151,6 +152,7 @@ class ZestawController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $model->data_dodania = date('y-m-d h:m:s');
+            $model->prywatne = 0;
             $this->setZestawValues($model);
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -234,16 +236,25 @@ class ZestawController extends Controller
      */
     public function actionDelete($id)
     {
-        if (Authenticator::checkIfAuthorWithId($id) ||
+        if (Authenticator::checkIfAuthor() ||
             Authenticator::checkIfRola(Constants::ADMIN_ID)) {
-            $this->findModel($id)->delete();
-        }
-        else if (Authenticator::checkIfHasPermissionWithId($id) &&
+            $this->removeWyniksAndZestaws($id);
+        } else if (Authenticator::checkIfHasPermission() &&
             Authenticator::checkIfRola(Constants::SUPER_REDAKTOR_ID))
-            $this->findModel($id)->delete();
+            $this->removeWyniksAndZestaws($id);
 
         return $this->redirect(['index']);
 
+    }
+
+    private function removeWyniksAndZestaws($id)
+    {
+        $zestaw = Zestaw::findOne($id);
+        $wyniki = $zestaw->wyniks;
+        foreach ($wyniki as &$wynik) {
+            $wynik->delete();
+        }
+        $this->findModel($id)->delete();
     }
 
     /**

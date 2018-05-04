@@ -29,14 +29,15 @@ class SignupForm extends Model
             ['nazwisko', 'default'],
 
             ['rola_id', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Ta nazwa użytkownika jest już zajęta.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
+            [['username'], 'match', 'pattern' => '/^[AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpRrSsŚśTtUuWwYyZzŹźŻż1234567890]*$/', 'message'=>'Możesz podać tylko litery lub cyfry!!'],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'Ten email jest już zajęty.'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],

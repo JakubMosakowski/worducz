@@ -22,7 +22,8 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport" content="width=1024">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -46,14 +47,15 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Rejestracja', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Logowanie', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => 'Twoje konto', 'url' => ['/konto/view', 'id' => Yii::$app->user->identity->getId()]];
 
         $id = Yii::$app->user->identity->getId();
         $konto = Konto::findOne($id);
         if ($konto->rola_id !== Constants::USER_ID) {
-            $menuItems[] = ['label' => 'Dodaj zestaw', 'url' => ['zestaw/create']];
+            $menuItems[] = ['label' => 'Zestawy', 'url' => ['/zestaw']];
+            $menuItems[] = ['label' => 'Dodaj zestaw publiczny', 'url' => ['zestaw/create']];
         }
-        $menuItems[] = ['label' => 'Dodaj prywatny zestaw', 'url' => ['zestaw/user-zestaw']];
+        $menuItems[] = ['label' => 'Dodaj zestaw prywatny', 'url' => ['/zestaw/user-zestaw']];
+        $menuItems[] = ['label' => 'Twoje konto', 'url' => ['/konto/view', 'id' => Yii::$app->user->identity->getId()]];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(

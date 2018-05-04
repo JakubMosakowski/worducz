@@ -17,9 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="zestaw-userZestaw" align="center">
 
     <?php $form = ActiveForm::begin(); ?>
-    <div class="form-group">
-        <button id="endButton" class="btn btn-success" onClick="sentToPhp()">Zakończ</button>
-    </div>
+
     <?= $form->field($model, 'zestaw')->hiddenInput(['rows' => 6])->label(false) ?>
 
 
@@ -64,7 +62,9 @@ $this->params['breadcrumbs'][] = $this->title;
             </tbody>
         </table>
     </div>
-
+    <div class="form-group">
+        <button id="endButton" class="btn btn-success hidden" onClick="sentToPhp()">Stwórz zestaw</button>
+    </div>
 
 </div>
 
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
         let input2Text = document.getElementById('slowko2Input').value;
         if (input1Text != "" && input2Text != "") {
             document.getElementById('table').classList.remove('hidden');
-
+            document.getElementById('endButton').classList.remove('hidden');
             document.getElementById('slowko1Input').value = "";
             document.getElementById('slowko2Input').value = "";
             array[i] = input1Text + ';' + input2Text + '\n';
