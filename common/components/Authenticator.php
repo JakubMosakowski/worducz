@@ -17,8 +17,12 @@ class Authenticator
         if (!Yii::$app->user->isGuest) {
             $id = Yii::$app->user->identity->getId();
             $konto = Konto::findOne($id);
-            if ($konto !== null)
-                return $konto->rola_id == $rola_id;
+            if ($konto !== null){
+                if ($konto->rola_id==$rola_id)
+                    return true;
+                else
+                    return false;
+            }
             else
                 return false;
         }
