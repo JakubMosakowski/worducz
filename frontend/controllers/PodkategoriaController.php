@@ -93,7 +93,13 @@ class PodkategoriaController extends Controller
             $model->obrazek = UploadedFile::getInstance($model, 'obrazek');
             $imageUploader=new ImageUploader();
             $imageUploader->saveImageToBase($model, 'kategorie');
-            return $this->redirect(['view', 'id' => $model->id]);
+            $searchModel = new PodkategoriaSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
         }
 
         return $this->render('create', [
@@ -125,7 +131,13 @@ class PodkategoriaController extends Controller
                 $model->obrazek = $this->findModel($id)->obrazek;
                 $model->save();
             }
-            return $this->redirect(['view', 'id' => $model->id]);
+            $searchModel = new PodkategoriaSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
         }
 
 

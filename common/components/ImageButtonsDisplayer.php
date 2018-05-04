@@ -24,9 +24,9 @@ class ImageButtonsDisplayer
             $id = $row['id'];
             $path = $this->tablename . "/view?id=" . $id;
             if (!empty($obrazek)) {
-                $var = '<a href=/' . $path . ' class="btn btn-link" role="button">
-                            <img src=/' . $obrazek . ' class="img-rounded" width="150" height="150"/>
-                                  <p>' . $nazwa . '</p>
+                $var = '<a href=/' . $path . ' class="btn btn-link" role="button" style="color: #9d9d9d">
+                            <img src=/' . $obrazek . ' class="img-rounded" width="170" height="170"/>
+                                  <p style="margin: 10px 0; font-size: 130%;">' . $nazwa . '</p>
                         </a>';
                 echo $var;
             }
@@ -45,7 +45,7 @@ class ImageButtonsDisplayer
                 $var = '<a href=/' . $path . ' class="btn btn-link" role="button">
                             <div class="zestawContainer">
                                     <img src=/' . $obrazek . ' class="img-rounded" width="200" height="200"/>
-                                    <div class="centered">' . $nazwa . '</div>
+                                    <p class="centered">' . $nazwa . '</p>
                             </div>
                         </a>';
                 echo $var;

@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Zestaw */
 
-$this->title = 'Tryb sprawdzania';
+$this->title = 'Sprawdź się';
 $podkategoriaNazwa=Podkategoria::findOne($model->podkategoria_id)->nazwa;
 $kategoriaId=Podkategoria::findOne($model->podkategoria_id)->kategoria_id;
 $kategoriaNazwa=Kategoria::findOne($kategoriaId)->nazwa;

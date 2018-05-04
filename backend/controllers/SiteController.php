@@ -1,6 +1,8 @@
 <?php
 namespace backend\controllers;
 
+use common\components\Authenticator;
+use common\components\Constants;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -20,17 +22,15 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                'only' => ['index', 'create', 'update'],
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
                         'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            return Authenticator::checkIfRola(Constants::ADMIN_ID);
+                        }
                     ],
-                    [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
+                ]
             ],
             'verbs' => [
                 'class' => VerbFilter::className(),

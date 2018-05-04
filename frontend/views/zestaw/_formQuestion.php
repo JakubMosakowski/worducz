@@ -93,7 +93,8 @@ use yii\widgets\ActiveForm;
 
                 if (isCorrect(array[counter][secondLang], userText)) {
                     description.style.color = 'red';
-                    text = 'Źle! ' + array[counter][firstLang] + ' to ' + array[counter][secondLang];
+                    text = 'Źle! Poprawnym tłumaczeniem "' + array[counter][firstLang] + '" jest "' + array[counter][secondLang]+'"!';
+
                 }
                 else {
                     userResult++;
@@ -161,7 +162,7 @@ use yii\widgets\ActiveForm;
 
                 if (isCorrect(array[counter][secondLang], userText)) {
                     description.style.color = 'red';
-                    text = 'Źle! ' + array[counter][firstLang] + ' to ' + array[counter][secondLang];
+                    text = 'Źle! Poprawnym tłumaczeniem "' + array[counter][firstLang] + '" jest "' + array[counter][secondLang]+'"!';
                     n = array.length;
                     if (firstLang == 1)
                         array.push([array[counter][secondLang], array[counter][firstLang]]);

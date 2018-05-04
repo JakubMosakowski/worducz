@@ -46,14 +46,14 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Rejestracja', 'url' => ['/site/signup']];
         $menuItems[] = ['label' => 'Logowanie', 'url' => ['/site/login']];
     } else {
-        $menuItems[] = ['label' => 'Twoje konto', 'url' => ['/konto/view','id'=>Yii::$app->user->identity->getId()]];
+        $menuItems[] = ['label' => 'Twoje konto', 'url' => ['/konto/view', 'id' => Yii::$app->user->identity->getId()]];
 
         $id = Yii::$app->user->identity->getId();
         $konto = Konto::findOne($id);
-        if($konto->rola_id!==Constants::USER_ID){
-            $menuItems[]= ['label' => 'Dodaj zestaw', 'url' => ['zestaw/create']];
+        if ($konto->rola_id !== Constants::USER_ID) {
+            $menuItems[] = ['label' => 'Dodaj zestaw', 'url' => ['zestaw/create']];
         }
-            $menuItems[]= ['label' => 'Dodaj prywatny zestaw', 'url' => ['zestaw/user-zestaw']];
+        $menuItems[] = ['label' => 'Dodaj prywatny zestaw', 'url' => ['zestaw/user-zestaw']];
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
@@ -69,14 +69,17 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-
+    <img id="main-image" src="/uploads/others/mainImageSmaller.jpg" class="img-responsive" alt="Main image" style="width: 100%">
+    <?= Breadcrumbs::widget([
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]) ?>
     <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
+
         <?= Alert::widget() ?>
         <?= $content ?>
     </div>
+
+
 </div>
 
 <footer class="footer">
