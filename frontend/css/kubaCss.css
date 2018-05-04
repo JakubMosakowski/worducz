@@ -1,0 +1,26 @@
+.centered{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.zestawContainer{
+    position: relative;
+    text-align: center;
+    color: black;
+}
+
+.separator{
+    width:50px;
+    height: auto;
+    display: inline-block;
+}
+.bigger_inputs{
+    width: 200px;
+    height: 500px;
+}
+
+.my-navbar{
+    color: #ffff00;
+}

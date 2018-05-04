@@ -31,11 +31,11 @@ class SqlQueryGenerator
 
     public function getSetOfRows()
     {
-        try {
+       // try {
             $rows = Yii::$app->db->createCommand('Select * FROM ' . $this->tablename)->queryAll();
-        } catch (Exception $e) {
+       // } catch (Exception $e) {
 
-        }
+       // }
         return $rows;
     }
 

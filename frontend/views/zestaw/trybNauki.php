@@ -23,8 +23,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="index.php?r=zestaw%2Flang1-lang2&id=<?php echo $model->id ?>&alg=1">Pytaj raz!</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="index.php?r=zestaw%2Flang1-lang2&id=<?php echo $model->id ?>&alg=2">Pytaj wielokrotnie!</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="/zestaw/lang1-lang2?id=<?php echo $model->id ?>&alg=1">Pytaj raz!</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="/zestaw/lang1-lang2?id=<?php echo $model->id ?>&alg=2">Pytaj wielokrotnie!</a></li>
             </ul>
         </div>
     </div>
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <button class="btn btn-primary dropdown-toggle" id="menu2" type="button" data-toggle="dropdown">Mieszane
                 <span class="caret"></span></button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="index.php?r=zestaw%2Fmix&id=<?php echo $model->id ?>&alg=3">Przygotuj do sprawdzianu!</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="/zestaw/mix?id=<?php echo $model->id ?>&alg=3">Przygotuj do sprawdzianu!</a></li>
                 </ul>
         </div>
     </div>
@@ -50,8 +50,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <span class="caret"></span></button>
 
             <ul class="dropdown-menu" role="menu" aria-labelledby="menu3">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="index.php?r=zestaw%2Flang2-lang1&id=<?php echo $model->id ?>&alg=1">Pytaj raz!</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="index.php?r=zestaw%2Flang2-lang1&id=<?php echo $model->id ?>&alg=2">Pytaj wielokrotnie!</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="/zestaw/lang2-lang1?id=<?php echo $model->id ?>&alg=1">Pytaj raz!</a></li>
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="/zestaw/lang2-lang1?id=<?php echo $model->id ?>&alg=2">Pytaj wielokrotnie!</a></li>
             </ul>
         </div>
     </div>

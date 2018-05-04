@@ -22,10 +22,10 @@ class ImageButtonsDisplayer
             $obrazek = $row['obrazek'];
             $nazwa = $row['nazwa'];
             $id = $row['id'];
-            $path = "index.php?r=" . $this->tablename . "%2Fview&id=" . $id;
+            $path = $this->tablename . "/view?id=" . $id;
             if (!empty($obrazek)) {
-                $var = '<a href=' . $path . ' class="btn btn-link" role="button">
-                            <img src=' . $obrazek . ' class="img-rounded" width="150" height="150"/>
+                $var = '<a href=/' . $path . ' class="btn btn-link" role="button">
+                            <img src=/' . $obrazek . ' class="img-rounded" width="150" height="150"/>
                                   <p>' . $nazwa . '</p>
                         </a>';
                 echo $var;
@@ -40,11 +40,11 @@ class ImageButtonsDisplayer
             $obrazek = 'uploads/others/whiteboard.jpg';
             $nazwa = $row['nazwa'];
             $id = $row['id'];
-            $path = "index.php?r=" . $this->tablename . "%2Fview&id=" . $id;
+            $path = $this->tablename . "/view?id=" . $id;
             if (!empty($obrazek)) {
-                $var = '<a href=' . $path . ' class="btn btn-link" role="button">
+                $var = '<a href=/' . $path . ' class="btn btn-link" role="button">
                             <div class="zestawContainer">
-                                    <img src=' . $obrazek . ' class="img-rounded" width="200" height="200"/>
+                                    <img src=/' . $obrazek . ' class="img-rounded" width="200" height="200"/>
                                     <div class="centered">' . $nazwa . '</div>
                             </div>
                         </a>';
