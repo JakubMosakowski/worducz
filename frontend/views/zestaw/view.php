@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <div class="media">
-            <a href="/zestaw/tryb-nauki?id=<?php echo $model->id ?>" class="pull-left">
+            <a href="/zestaw/tryb-sprawdzania?id=<?php echo $model->id ?>" class="pull-left">
                 <img src="/uploads/others/two.jpg"/>
             </a>
             <div class="media-body">

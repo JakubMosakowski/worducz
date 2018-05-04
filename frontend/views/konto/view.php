@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
     $graphFiller=new GraphFiller($model->id);
     echo Highcharts::widget([
         'options' => [
-            'title' => ['text' => 'woje wyniki osiągnięte ze wszystkich sprawdzianów które wypełniłeś'],
+            'title' => ['text' => 'Twoje wyniki osiągnięte ze wszystkich sprawdzianów które wypełniłeś'],
             'xAxis' => [
                 'title' => ['text' => 'Data/zestaw'],
                 'categories' => $graphFiller->resultArray,
