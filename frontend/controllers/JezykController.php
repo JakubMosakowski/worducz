@@ -23,14 +23,16 @@ class JezykController extends Controller
     public function behaviors()
     {
         return [
-            'access'=>[
-                'class'=>AccessControl::className(),
-                'only' => ['index','create','update','view'],
-                'rules' =>[
-                    'allow'=>true,
-                    'matchCallback'=>function($rule,$action){
-                        return Authenticator::checkIfRola(Constants::ADMIN_ID);
-                    }
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'create', 'update'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            return Authenticator::checkIfRola(Constants::ADMIN_ID);
+                        }
+                    ],
                 ]
             ],
             'verbs' => [

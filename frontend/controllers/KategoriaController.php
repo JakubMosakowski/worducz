@@ -26,13 +26,13 @@ class KategoriaController extends Controller
     public function behaviors()
     {
         return [
-            'access'=>[
-                'class'=>AccessControl::className(),
-                'only' => ['index','create','update'],
-                'rules' =>[
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'create', 'update'],
+                'rules' => [
                     [
-                        'allow'=>true,
-                        'matchCallback'=>function($rule,$action){
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
                             return Authenticator::checkIfRola(Constants::ADMIN_ID);
                         }
                     ],
@@ -84,9 +84,9 @@ class KategoriaController extends Controller
     {
         $model = new Kategoria();
         $model->scenario = 'create';
-        if ($model->load(Yii::$app->request->post()) ) {
+        if ($model->load(Yii::$app->request->post())) {
             $model->obrazek = UploadedFile::getInstance($model, 'obrazek');
-            $imageUploader=new ImageUploader();
+            $imageUploader = new ImageUploader();
             $imageUploader->saveImageToBase($model, 'kategorie');
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -107,10 +107,10 @@ class KategoriaController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) ) {
+        if ($model->load(Yii::$app->request->post())) {
             $model->obrazek = UploadedFile::getInstance($model, 'obrazek');
             if (null !== $model->obrazek) {
-                $imageUploader=new ImageUploader();
+                $imageUploader = new ImageUploader();
                 $imageUploader->saveImageToBase($model, 'kategorie');
             } else {
                 $model->obrazek = $this->findModel($id)->obrazek;
