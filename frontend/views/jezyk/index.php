@@ -20,6 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
         Test echo
         Test echo2
         Test 3
+        test 4
     </p>
 
     <?= GridView::widget([
