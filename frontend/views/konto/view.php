@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'options' => [
             'title' => ['text' => 'Twoje wyniki osiągnięte ze wszystkich sprawdzianów które wypełniłeś'],
             'xAxis' => [
-                'title' => ['text' => 'Data/zestaw'],
+                'title' => ['text' => 'Data/zestaw<br>Podkategoria'],
                 'categories' => $graphFiller->resultArray,
             ],
             'yAxis' => [

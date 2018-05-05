@@ -18,7 +18,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'opis')->textarea(['rows' => 6]) ?>
 
+    <?= $form->field($model, 'ukryte')->dropDownList(['1'=>'Ukryte','0'=>'Widoczne']) ?>
+
     <?= $form->field($model, 'obrazek')->fileInput() ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Zapisz', ['class' => 'btn btn-success']) ?>

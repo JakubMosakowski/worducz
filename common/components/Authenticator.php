@@ -12,7 +12,7 @@ use yii\helpers\ArrayHelper;
 class Authenticator
 {
 
-    public static function checkIfRola($rola_id)
+    public static function checkIfRolaMatch($rola_id)
     {
         if (!Yii::$app->user->isGuest) {
             $id = Yii::$app->user->identity->getId();

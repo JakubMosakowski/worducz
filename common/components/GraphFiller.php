@@ -2,6 +2,9 @@
 
 namespace common\components;
 
+use app\models\Podkategoria;
+use app\models\Wynik;
+use app\models\Zestaw;
 use Yii;
 use yii\db\Exception;
 
@@ -11,18 +14,26 @@ class GraphFiller
     public $scoresAsIntegers=Array();
 
     public function __construct($id){
-        $sqlGen = new SqlQueryGenerator('wynik');
-        $formatter = new WynikFormatter($id);
-        $rows = $sqlGen->getSetOfRows();
-        $datesArray = $formatter->format($rows, 'data_wyniku');
-        $scoresArray = $formatter->format($rows, 'wynik');
-        $zestawArray = $formatter->format($rows, 'zestaw_id');
+
+        $wyniki=Wynik::findAll(['konto_id'=>$id]);
+        foreach($wyniki as $item){
+            $zestawId=$item->zestaw_id;
+            $zestaw=Zestaw::findOne($zestawId);
+
+            $datesArray[]=$item->data_wyniku;
+            $scoresArray[]=$item->wynik;
+            $zestawNameArray[]=$zestaw->nazwa;
+
+
+
+            $podkategoriaId=$zestaw->podkategoria_id;
+            $podkategoriaArrayName[]=Podkategoria::findOne($podkategoriaId)->nazwa;
+        }
         $this->scoresAsIntegers = array_map('intval', $scoresArray);
         $count = count($datesArray);
 
         for ($i = 0; $i < $count; $i++) {
-            $zestawName = Yii::$app->db->createCommand('Select nazwa FROM zestaw WHERE id =' . $zestawArray[$i])->queryScalar();
-            $this->resultArray[] = $datesArray[$i] . '/' . $zestawName;
+            $this->resultArray[] = $datesArray[$i] . '/' . $zestawNameArray[$i].'<br>'.$podkategoriaArrayName[$i];
         }
     }
 }

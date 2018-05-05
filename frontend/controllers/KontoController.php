@@ -33,7 +33,7 @@ class KontoController extends Controller
                     [
                         'allow' => true,
                         'matchCallback' => function ($rule, $action) {
-                            return Authenticator::checkIfRola(Constants::ADMIN_ID);
+                            return Authenticator::checkIfRolaMatch(Constants::ADMIN_ID);
                         }
                     ],
                 ]

@@ -7,50 +7,49 @@ use yii\db\Exception;
 
 class ImageButtonsDisplayer
 {
-    private $tablename;
-
-    function __construct($name)
+    public function showButtons($models,$class_name)
     {
-        $this->tablename = $name;
-    }
-
-
-    public function showButtons($rows)
-    {
-        foreach ($rows as &$row) {
-
-            $obrazek = $row['obrazek'];
-            $nazwa = $row['nazwa'];
-            $id = $row['id'];
-            $path = $this->tablename . "/view?id=" . $id;
-            if (!empty($obrazek)) {
-                $var = '<a href=/' . $path . ' class="btn btn-link" role="button" style="color: #9d9d9d">
+        try {
+            foreach ($models as &$row) {
+                $obrazek = $row->obrazek;
+                $nazwa = $row->nazwa;
+                $id = $row->id;
+                $path = $class_name. "/view?id=" . $id;
+                if (!empty($obrazek)) {
+                    $var = '<a href=/' . $path . ' class="btn btn-link" role="button" style="color: #9d9d9d">
                             <img src=/' . $obrazek . ' class="img-rounded" width="170" height="170"/>
                                   <p style="margin: 10px 0; font-size: 130%;">' . $nazwa . '</p>
                         </a>';
-                echo $var;
+                    echo $var;
+                }
             }
+        } catch (\Exception $e) {
         }
+
     }
 
-    public function showRawButtons($rows)
+    public function showRawButtons($models,$class_name)
     {
-        foreach ($rows as &$row) {
+        try {
+            foreach ($models as &$row) {
 
-            $obrazek = 'uploads/others/whiteboard.jpg';
-            $nazwa = $row['nazwa'];
-            $id = $row['id'];
-            $path = $this->tablename . "/view?id=" . $id;
-            if (!empty($obrazek)) {
-                $var = '<a href=/' . $path . ' class="btn btn-link" role="button">
+                $obrazek = 'uploads/others/whiteboard.jpg';
+                $nazwa = $row->nazwa;
+                $id = $row->id;
+                $path = $class_name . "/view?id=" . $id;
+                if (!empty($obrazek)) {
+                    $var = '<a href=/' . $path . ' class="btn btn-link" role="button">
                             <div class="zestawContainer">
                                     <img src=/' . $obrazek . ' class="img-rounded" width="200" height="200"/>
                                     <p class="centered">' . $nazwa . '</p>
                             </div>
                         </a>';
-                echo $var;
+                    echo $var;
 
+                }
             }
+
+        } catch (\Exception $e) {
         }
     }
 

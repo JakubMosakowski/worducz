@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return yii\bootstrap\Html::img($model->obrazek,['width'=>'75']);
                 }
             ],
+            'ukryte',
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

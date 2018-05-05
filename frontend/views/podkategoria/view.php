@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Kategoria;
+use app\models\Zestaw;
 use common\components\ImageButtonsDisplayer;
 use yii\helpers\Html;
 
@@ -16,15 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="podkategoria-view" align="center">
 
     <?php
-    $buttonsDisplayer = new ImageButtonsDisplayer('zestaw');
-    $sqlGen=new \common\components\SqlQueryGenerator('zestaw');
-
-    $rows1=$sqlGen->getZestawPublic($model->id);
-    $buttonsDisplayer->showRawButtons($rows1);
-
+    $zestawy=Zestaw::findAll(['prywatne'=>0, 'podkategoria_id'=>$_GET['id']]);
+    $buttonsDisplayer = new ImageButtonsDisplayer();
+    $buttonsDisplayer->showRawButtons($zestawy,'zestaw');
     if(!Yii::$app->user->isGuest){
-        $rows2=$sqlGen->getZestawMatching(Yii::$app->user->identity->getId(),$model->id);
-        $buttonsDisplayer->showRawButtons($rows2);
+        $zestawy=Zestaw::findAll(['prywatne'=>1, 'konto_id'=>Yii::$app->user->identity->getId(), 'podkategoria_id'=>$_GET['id']]);
+        $buttonsDisplayer->showRawButtons($zestawy,'zestaw');
     }
     ?>
 

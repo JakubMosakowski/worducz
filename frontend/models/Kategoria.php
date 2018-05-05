@@ -11,6 +11,7 @@ use Yii;
  * @property string $nazwa
  * @property string $opis
  * @property resource $obrazek
+ * @property int $ukryte
  *
  * @property Podkategoria[] $podkategorias
  */
@@ -35,6 +36,8 @@ class Kategoria extends \yii\db\ActiveRecord
             [['obrazek'], 'file','extensions'=>'jpeg,jpg,png,gif'],
             [['obrazek'],'required','on'=> 'create'],
             [['nazwa'], 'string', 'max' => 20],
+            [['ukryte'], 'boolean'],
+
             [['nazwa'], 'match', 'pattern' => '/^[AaĄąBbCcĆćDdEeĘęFfGgHhIiJjKkLlŁłMmNnŃńOoÓóPpRrSsŚśTtUuWwYyZzŹźŻż]*$/', 'message'=>'W tym polu możesz podać jedynie litery.'],
         ];
     }

@@ -26,7 +26,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <?= $form->field($model, 'podkategoria_id')->dropDownList($podkategorie) ?>
-
+    <div class="form-group">
+        <button id="endButton" class="btn btn-success hidden" onClick="sentToPhp()">Stwórz zestaw</button>
+    </div>
 
     <?php ActiveForm::end(); ?>
     <div class="row" style="display: flex; justify-content: center">
@@ -62,9 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </tbody>
         </table>
     </div>
-    <div class="form-group">
-        <button id="endButton" class="btn btn-success hidden" onClick="sentToPhp()">Stwórz zestaw</button>
-    </div>
+
 
 </div>
 

@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Kategoria;
 use common\components\ImageButtonsDisplayer;
 
 /* @var $this yii\web\View */
@@ -24,10 +25,9 @@ $this->params['breadcrumbs'][] ="";
         <br><br><br><br>
     </div>
     <?php
-    $buttonsDisplayer = new ImageButtonsDisplayer('kategoria');
-    $sqlGen=new \common\components\SqlQueryGenerator('kategoria');
-    $rows = $sqlGen->getSetOfRows();
-    $buttonsDisplayer->showButtons($rows);
+    $kategorie=Kategoria::findAll(['ukryte'=>0]);
+    $buttonsDisplayer = new ImageButtonsDisplayer();
+    $buttonsDisplayer->showButtons($kategorie,'kategoria');
     ?>
     <br>
 </div>

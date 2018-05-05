@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Konto;
+use app\models\Podkategoria;
 use common\components\ImageButtonsDisplayer;
 use common\components\SqlQueryGenerator;
 use yii\helpers\Html;
@@ -15,10 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="kategoria-view" align="center">
 
     <?php
-    $buttonsDisplayer = new ImageButtonsDisplayer('podkategoria');
-    $sqlGen = new \common\components\SqlQueryGenerator('podkategoria');
-    $rows = $sqlGen->getSetOfRowsWhere('kategoria_id', $model->id);
-    $buttonsDisplayer->showButtons($rows);
+    $podkategorie=Podkategoria::findAll(['kategoria_id'=>$_GET['id']]);
+    $buttonsDisplayer = new ImageButtonsDisplayer();
+    $buttonsDisplayer->showButtons($podkategorie,'podkategoria');
+
     ?>
 
 </div>

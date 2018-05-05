@@ -48,9 +48,9 @@ class ZestawController extends Controller
                     [
                         'allow' => true,
                         'matchCallback' => function ($rule, $action) {
-                            return Authenticator::checkIfRola(Constants::ADMIN_ID) ||
-                                Authenticator::checkIfRola(Constants::REDAKTOR_ID) ||
-                                Authenticator::checkIfRola(Constants::SUPER_REDAKTOR_ID);
+                            return Authenticator::checkIfRolaMatch(Constants::ADMIN_ID) ||
+                                Authenticator::checkIfRolaMatch(Constants::REDAKTOR_ID) ||
+                                Authenticator::checkIfRolaMatch(Constants::SUPER_REDAKTOR_ID);
                         }
                     ],
                 ]
@@ -62,11 +62,11 @@ class ZestawController extends Controller
                     [
                         'allow' => true,
                         'matchCallback' => function ($rule, $action) {
-                            if (Authenticator::checkIfRola(Constants::ADMIN_ID) ||
+                            if (Authenticator::checkIfRolaMatch(Constants::ADMIN_ID) ||
                                 Authenticator::checkIfAuthor())
                                 return true;
 
-                            if (Authenticator::checkIfRola(Constants::SUPER_REDAKTOR_ID) &&
+                            if (Authenticator::checkIfRolaMatch(Constants::SUPER_REDAKTOR_ID) &&
                                 Authenticator::checkIfHasPermission())
                                 return true;
 
@@ -141,7 +141,7 @@ class ZestawController extends Controller
     public function actionCreate()
     {
         $model = new Zestaw();
-        if (Authenticator::checkIfRola(Constants::ADMIN_ID)) {
+        if (Authenticator::checkIfRolaMatch(Constants::ADMIN_ID)) {
             $podkategorie = Podkategoria::find()
                 ->orderBy('nazwa')
                 ->all();
@@ -237,10 +237,10 @@ class ZestawController extends Controller
     public function actionDelete($id)
     {
         if (Authenticator::checkIfAuthor() ||
-            Authenticator::checkIfRola(Constants::ADMIN_ID)) {
+            Authenticator::checkIfRolaMatch(Constants::ADMIN_ID)) {
             $this->removeWyniksAndZestaws($id);
         } else if (Authenticator::checkIfHasPermission() &&
-            Authenticator::checkIfRola(Constants::SUPER_REDAKTOR_ID))
+            Authenticator::checkIfRolaMatch(Constants::SUPER_REDAKTOR_ID))
             $this->removeWyniksAndZestaws($id);
 
         return $this->redirect(['index']);
