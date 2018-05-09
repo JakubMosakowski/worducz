@@ -16,6 +16,8 @@ class GraphFiller
     public function __construct($id){
 
         $wyniki=Wynik::findAll(['konto_id'=>$id]);
+        $scoresArray=array();
+        $datesArray=array();
         foreach($wyniki as $item){
             $zestawId=$item->zestaw_id;
             $zestaw=Zestaw::findOne($zestawId);
